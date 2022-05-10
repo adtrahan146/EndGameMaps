@@ -1,0 +1,6 @@
+
+function clientInit(){
+    getHomepage();
+}
+
+clientInit();
