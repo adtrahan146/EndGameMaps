@@ -1,0 +1,19 @@
+{
+  "name": "maps---express-server",
+  "version": "1.0.0",
+  "description": "express server for EndGameMaps",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && nodemon server.js"
+  },
+  "author": "Alex Trahan",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.7",
+    "express": "*",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "*"
+  }
+}
