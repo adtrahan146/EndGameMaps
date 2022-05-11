@@ -1,4 +1,4 @@
-import * as MAP from '../model/mapView.js';
+import OurMap from '../model/mapView.js';
 
 export function getHomepage(){
     //Render homepage element
@@ -13,6 +13,6 @@ export function getMapView(){
     const view = document.getElementById('client-view');
     const html = `<div id='map'></div>`;
     view.innerHTML = html;
-    MAP.setupMap();
+    OurMap.initializeMap();
 }
 
