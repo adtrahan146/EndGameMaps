@@ -20,9 +20,9 @@ function setup(){
     app.use(bodyParser.urlencoded({extended: false}));
 
     app.use('/scripts', express.static(__dirname + '/node_modules'));
-    app.use('/api', routes);
+    app.use('/', routes);
 
-    app.set('views', './views');
+    // app.set('views', './views');
 }
 
 function start(){

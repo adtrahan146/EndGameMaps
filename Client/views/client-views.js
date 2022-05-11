@@ -1,14 +1,18 @@
-// const headers = {   'Access-Control-Allow-Origin':'*',
-//                     'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'};
+import OurMap from '../model/mapView.js';
 
-// async function getHomepage(){
-//     const view = document.getElementById('client-view');
-//     const url = `http://localhost:3000/`;
-//     const response = await fetch(url);
+export function getHomepage(){
+    //Render homepage element
+    const view = document.getElementById('client-view');
+    const html = `<h1 id='welcome'>welcome</h1>
+                    <button id='test-here'>Get The Map</button>`;
+    view.innerHTML = html;
+    document.getElementById('test-here').addEventListener('click', getMapView);
+}
 
-//     const data = await response.json();
-//     console.log(data);
-
-//     view.innerHTML = data.body;
-// }
+export function getMapView(){
+    const view = document.getElementById('client-view');
+    const html = `<div id='map'></div>`;
+    view.innerHTML = html;
+    OurMap.initializeMap();
+}
 
