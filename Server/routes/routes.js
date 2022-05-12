@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {test} = require('../controllers/server.controllers.js');
+const {test, sendHomepage} = require('../controllers/server.controllers.js');
 
 
 router.get('/test', test);
@@ -15,5 +15,7 @@ router.get('/login/createAccount');
 router.get('/mapMenu/manage/:pinID');
 router.get('/mapMenu/manage/:pinID');
 router.get('/mapMenu/manage/:pinID');
+
+router.get('/views/homepage', sendHomepage);
 
 module.exports = router;

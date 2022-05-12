@@ -1,4 +1,3 @@
-// import * as L from '../node_modules/leaflet/dist/leaflet.js';
 
 class OurMap{
 
