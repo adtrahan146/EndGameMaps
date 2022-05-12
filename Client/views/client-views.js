@@ -8,11 +8,8 @@ export async function getHomepage(){
     const response = await fetch(url);
     const html = await response.text();
 
-    // const html = `<h1 id='welcome'>welcome</h1>
-    //                 <button id='test-here'>Get The Map</button>`;
-
     view.innerHTML = html;
-    document.getElementById('test-here').addEventListener('click', getMapView);
+    document.getElementById('guest-btn').addEventListener('click', getMapView);
 }
 
 export function getMapView(){
