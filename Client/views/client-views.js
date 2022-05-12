@@ -14,7 +14,8 @@ export async function getHomepage(){
 
 export function getMapView(){
     const view = document.getElementById('client-view');
-    const html = `<div id='map'></div>`;
+    const html = `<div></div>
+                    <div id='map'></div>`;
     view.innerHTML = html;
     OurMap.initializeMap();
 }
