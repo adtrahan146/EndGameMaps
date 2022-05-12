@@ -28,7 +28,7 @@ function setup(){
 }
 
 function start(){
-    app.listen(port, () => console.log("server is running port ", port) );
+    app.listen(port, () => console.log(`server is running port on port ${port}`) );
 }
 
 
