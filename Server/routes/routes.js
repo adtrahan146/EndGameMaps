@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {test, sendHomepage} = require('../controllers/server.controllers.js');
+const {test, sendHomepage, sendNavbar, sendMapview} = require('../controllers/server.controllers.js');
 
 
 router.get('/test', test);
@@ -18,5 +18,7 @@ router.get('/mapMenu/manage/:pinID');
 
 //complete
 router.get('/views/homepage', sendHomepage);
+router.get('/views/mapview', sendMapview);
+router.get('/views/navbar', sendNavbar);
 
 module.exports = router;

@@ -1,36 +1,44 @@
 import OurMap from '../model/mapView.js';
 
+const BASE_URL = 'http://localhost:3000';
+
 export async function getHomepage(){
     //Render homepage element
     const view = document.getElementById('client-view');
 
-    const url = `http://localhost:3000/views/homepage`;
-    const response = await fetch(url);
-    const html = await response.text();
+    const url = `${BASE_URL}/views/homepage`;
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+    
+        view.innerHTML = html;
+        document.getElementById('guest-btn').addEventListener('click', getMapView);
+    } catch (error) {
+        console.log('404 From server... May be down.');
+        view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
+    }
 
-    view.innerHTML = html;
-    document.getElementById('guest-btn').addEventListener('click', getMapView);
 }
 
-export function getMapView(){
-    const view = document.getElementById('client-view');
-    const html = `<div class="container-fluid text-white">
-                    <div class="row position-relative">
+export async function getMapView(){
+    try {
+        const view = document.getElementById('client-view');
+        const mapview = await fetch(`${BASE_URL}/views/mapview`);
+        const mhHml = await mapview.text();
+        view.innerHTML = mhHml;
 
-                        <div class="col-md-3">
-                            <h3>Sort</h3>
-                            <h3>Find</h3>
-                            <h3>Create</h3>
-                            <hr class="text-white">
-                            <h3>Settings</h3>
-                        </div>
-
-                        <div id='map' class="col-md-9">
-
-                        </div>
-                    </div>
-                </div>`;
-    view.innerHTML = html;
+        const navbarView = document.getElementById('navbar');
+        const url = `${BASE_URL}/views/navbar`;
+    
+        const response = await fetch(url);
+        const html = await response.text();
+    
+        navbarView.innerHTML = html;
+        // document.getElementById('navbar').addEventListener('click', getMapView);
+    } catch (error) {
+        console.log('ERROR.');
+        view.innerHTML = `<h1>ERROR: Reload page in 2 seconds.</h1>`
+    }
     OurMap.initializeMap();
 }
 
