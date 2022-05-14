@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const {test, sendHomepage, sendNavbar, sendMapview, sendLoginMenu, sendCreateAccountMenu} = require('../controllers/server.controllers.js');
+const {test, sendHomepage, 
+    sendNavbar, sendMapview, 
+    sendLoginMenu, sendCreateAccountMenu} = require('../controllers/server.controllers.js');
 
 
 router.get('/test', test);
@@ -20,7 +22,7 @@ router.get('/views/homepage', sendHomepage);
 router.get('/views/mapview', sendMapview);
 router.get('/views/navbar', sendNavbar);
 router.get('/views/loginMenu', sendLoginMenu);
-router.get('/views/createAccountMenu', sendCreateAccountMenu)
+router.get('/views/createAccountMenu', sendCreateAccountMenu);
 
 
 module.exports = router;

@@ -22,6 +22,7 @@ export async function getMapView(){
         view.innerHTML = `<h1>ERROR: Reload page in 2 seconds.</h1>`
     }
     OurMap.initializeMap();
+    Controls.configureNavbarBtns();
 }
 
 export async function getHomepage(){
@@ -37,7 +38,7 @@ export async function getHomepage(){
         view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
     }
 
-    Controls.configureBtns();
+    Controls.configureHomepageBtns();
 
 }
 
