@@ -10,11 +10,10 @@ export async function getHomepage(){
     try {
         const response = await fetch(url);
         const html = await response.text();
-    
+
         view.innerHTML = html;
         document.getElementById('guest-btn').addEventListener('click', getMapView);
     } catch (error) {
-        console.log('404 From server... May be down.');
         view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
     }
 

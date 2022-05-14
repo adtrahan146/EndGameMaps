@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
+const ejs = require('ejs');
 const routes = require('./routes/routes.js');
 
 const app = express();
@@ -13,11 +14,14 @@ start();
 
 function setup(){
     app.use(express.static(path.join(__dirname, '/public')));
-    app.use(express.static(path.join(__dirname, '/views')));
+    // app.use(express.static(path.join(__dirname, '/views')));
     
     app.use(localhostHandler);
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
+
+    app.set("views", path.join(__dirname, "/views"));
+    app.set('view engine', 'ejs');
 
     app.use('/scripts', express.static(__dirname + '/node_modules'));
     app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));

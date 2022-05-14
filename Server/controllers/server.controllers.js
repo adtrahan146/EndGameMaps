@@ -8,18 +8,18 @@ class ServerControllers{
     }
 
     sendHomepage(req, res){
-        res.sendFile(path.resolve('views/homepage.html'));
-        // res.render('/views/homepage');
+        // res.sendFile(path.resolve('views/homepage.html'));
+        res.render('homepage');
         console.log(`homepage sent`);
     }
 
     sendNavbar(req, res){
-        res.sendFile(path.resolve(`views/navbar.html`));
+        res.render(`navbar`);
         console.log('navbar sent');
     }
 
     sendMapview(req, res){
-        res.sendFile(path.resolve(`views/mapView.html`));
+        res.render(`mapView`);
     }
 
 }
