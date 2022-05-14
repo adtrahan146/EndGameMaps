@@ -2,7 +2,7 @@
 class OurMap{
 
 	#position;
-	#map;
+	map;
 
 	constructor(){
 		this.#position = {
@@ -10,20 +10,25 @@ class OurMap{
 			longitude: 0
 		};
 		this.getUserCoords();
+
 	}
 	
 	initializeMap(){
-	
+
+		this.map = L.map('map');
+
 		//TODO: Take in user coords as params for setView()
-		this.#map = L.map('map');
-		this.#map.setView([this.#position.latitude, this.#position.longitude], 10);
+		this.map.setView([this.#position.latitude, this.#position.longitude], 11);
 	
 		//National Geographic free map tiles that look nice on my weak eyes
 		var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
-			maxZoom: 16
+			maxZoom: 16,
 		});
-		this.#map.addLayer(Esri_NatGeoWorldMap);
+		this.map.addLayer(Esri_NatGeoWorldMap);
+
+		//Map Binding events
+		this.map.on('click', this.onMapClickTest);
 	}
 	
 	getUserCoords(){
@@ -40,6 +45,13 @@ class OurMap{
 		this.#position.longitude = position.coords.longitude;
 	  
 		// Some other code here (does not affect the API)
+	}
+
+	onMapClickTest = (e) =>{
+		var popup = L.popup();
+		popup.setLatLng(e.latlng);
+		popup.setContent("You clicked the map at " + e.latlng.toString());
+		popup.addTo(this.map);
 	}
 
 }
