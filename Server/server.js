@@ -26,7 +26,9 @@ function setup(){
     app.use('/scripts', express.static(__dirname + '/node_modules'));
     app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
     app.use('/bootstrap-icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
+    app.use('/assets', express.static(path.join(__dirname, '/public/assets')));
 
+    
     app.use('/', routes);
 
     // app.set('views', './views');
