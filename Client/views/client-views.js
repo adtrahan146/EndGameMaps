@@ -23,7 +23,7 @@ export async function getMapView(){
     }
     OurMap.initializeMap();
     Controls.configureNavbarBtns();
-    // Controls.configureMapMenuBtns();
+    Controls.configureMapMenuBtns();
 }
 
 export async function getHomepage(){

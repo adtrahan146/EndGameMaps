@@ -15,12 +15,21 @@ class ClientControls{
         // const account = document.getElementById('nv-accountSettings').addEventListener('click', viewFunctions.getAccountSettingsMenu);
     }
 
-    // configureMapMenuBtns = function(){
-    //     const sort = document.getElementById('sort-tab').addEventListener('click', viewFunctions.getPinSort);
-    //     const find = document.getElementById('find-tab').addEventListener('click', viewFunctions.getPinFind);
-    //     const create = document.getElementById('create-tab').addEventListener('click', viewFunctions.getPinCreate);
-    //     const manage = document.getElementById('manage-tab').addEventListener('click', viewFunctions.getPinManage);
-    // }
+    configureMapMenuBtns = function(){
+        const sort = document.getElementById('sort-tab').addEventListener('click', viewFunctions.getPinSort);
+        const find = document.getElementById('find-tab').addEventListener('click', viewFunctions.getPinFind);
+        const create = document.getElementById('create-tab').addEventListener('click', viewFunctions.getPinCreate);
+        const manage = document.getElementById('manage-tab').addEventListener('click', viewFunctions.getPinManage);
+    }
+
+    updatemenu = function(){
+        if (document.getElementById('responsive-menu').checked == true) {
+          document.getElementById('menu').style.borderBottomRightRadius = '0';
+          document.getElementById('menu').style.borderBottomLeftRadius = '0';
+        }else{
+          document.getElementById('menu').style.borderRadius = '10px';
+        }
+      }
 }
 
 export default new ClientControls();
