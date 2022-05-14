@@ -62,11 +62,10 @@ export async function getLoginMenu(){
 
 export async function getCreateAccountMenu(){
     try {
-        
         //Render CreateAccountMenu
-        const view = document.getElementById('client-view');
+        const view = document.getElementById('selector');
 
-        const url = `${BASE_URL}/views/homepage`;
+        const url = `${BASE_URL}/views/createAccountMenu`;
         try {
             const response = await fetch(url);
             const html = await response.text();

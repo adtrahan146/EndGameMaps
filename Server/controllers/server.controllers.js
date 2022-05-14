@@ -28,6 +28,10 @@ class ServerControllers{
         res.render(`loginMenu`);
     }
 
+    sendCreateAccountMenu(req, res){
+        res.render(`createAccountMenu`);
+    }
+
     //Handling user login
     // app.post("/login", passport.authenticate("local", {
     //     successRedirect: "/secret",
