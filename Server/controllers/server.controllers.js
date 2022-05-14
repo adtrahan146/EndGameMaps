@@ -32,6 +32,10 @@ class ServerControllers{
         res.render(`createAccountMenu`);
     }
 
+    sendMapMenuManage(req, res){
+        res.render(`mapMenuManage`);
+    }
+
     //Handling user login
     // app.post("/login", passport.authenticate("local", {
     //     successRedirect: "/secret",

@@ -78,3 +78,21 @@ export async function getCreateAccountMenu(){
         console.log(error);
     }
 }
+
+export async function getMapMenuManage(){
+    try {
+        //Render CreateAccountMenu
+        const view = document.getElementById('selector');
+
+        const url = `${BASE_URL}/views/createAccountMenu`;
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            view.innerHTML = html;
+        } catch (error) {
+            view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

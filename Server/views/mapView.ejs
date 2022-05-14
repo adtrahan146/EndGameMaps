@@ -4,12 +4,31 @@
 
         <div class="col-md-4">
 
-            <nav class="nav nav-pills nav-fill justify-content-center">
-                <button class="btn btn-outline-light m-2" href="#"> Sort </button>
-                <button class="btn btn-outline-light m-2" href="#"> Find </button>
-                <button class="btn btn-outline-light m-2" href="#"> Create </button>
-                <button class="btn btn-outline-light m-2" href="#"> Manage </button>
+
+            <!-- Need help sorting this to look more presentable... -->
+
+            <nav>
+                <div class="nav nav-pills nav-fill justify-content-center" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link" id="sort-tab" data-toggle="pill" href="#nav-sort" role="tab" aria-controls="nav-sort" aria-selected="false">Sort</a>
+                    <a class="nav-item nav-link" id="find-tab" data-toggle="pill" href="#nav-find" role="tab" aria-controls="nav-profile" aria-selected="false">Find</a>
+                    <a class="nav-item nav-link" id="create-tab" data-toggle="pill" href="#nav-create" role="tab" aria-controls="nav-contact" aria-selected="false">Create</a>
+                    <a class="nav-item nav-link" id="manage-tab" data-toggle="pill" href="#nav-manage" role="tab" aria-controls="nav-contact" aria-selected="false">Manage</a>
+                </div>
             </nav>
+            <div class="tab-content text-white" id="nav-tabContent">
+                <div class="tab-pane fade" id="nav-sort" role="tabpanel" aria-labelledby="nav-sort-tab">...</div>
+                <div class="tab-pane fade" id="nav-find" role="tabpanel" aria-labelledby="nav-find-tab">...</div>
+                <div class="tab-pane fade" id="nav-create" role="tabpanel" aria-labelledby="nav-create-tab">...</div>
+                <div class="tab-pane fade" id="nav-manage" role="tabpanel" aria-labelledby="nav-manage-tab">...</div>
+            </div>
+
+
+            <!-- <nav class="nav nav-pills nav-fill justify-content-center">
+                <button id="sort-btn" class="btn btn-outline-light m-2" href="#"> Sort </button>
+                <button id="find-btn" class="btn btn-outline-light m-2" href="#"> Find </button>
+                <button id="create-btn" class="btn btn-outline-light m-2" href="#"> Create </button>
+                <button id="manage-btn" class="btn btn-outline-light m-2" href="#"> Manage </button>
+            </nav> -->
         </div>
 
         <div id='map' class="col-md-8"></div>
