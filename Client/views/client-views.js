@@ -23,6 +23,7 @@ export async function getMapView(){
     }
     OurMap.initializeMap();
     Controls.configureNavbarBtns();
+    // Controls.configureMapMenuBtns();
 }
 
 export async function getHomepage(){
@@ -44,7 +45,7 @@ export async function getHomepage(){
 
 export async function getLoginMenu(){
     try {
-        //Render loginPage
+        //Render loginPage from Homepage.ejs
         const view = document.getElementById('selector');
 
         const url = `${BASE_URL}/views/loginMenu`;
@@ -63,7 +64,7 @@ export async function getLoginMenu(){
 
 export async function getCreateAccountMenu(){
     try {
-        //Render CreateAccountMenu
+        //Render CreateAccountMenu from Homepage.ejs
         const view = document.getElementById('selector');
 
         const url = `${BASE_URL}/views/createAccountMenu`;
@@ -81,10 +82,10 @@ export async function getCreateAccountMenu(){
 
 export async function getMapMenuManage(){
     try {
-        //Render CreateAccountMenu
+        //Render MapMenuManage from mapView.ejs
         const view = document.getElementById('selector');
 
-        const url = `${BASE_URL}/views/createAccountMenu`;
+        const url = `${BASE_URL}/views/mapMenuManage`;
         try {
             const response = await fetch(url);
             const html = await response.text();
@@ -96,3 +97,19 @@ export async function getMapMenuManage(){
         console.log(error);
     }
 }
+
+
+//MapMenuManage:
+// export async function getPinSort(){
+//     try {
+//         const view = document.getElementById('nav-sort');
+
+//         const url = `${BASE_URL}/views/sort`;
+//         const response = await fetch(url);
+//         const html = await response.text();
+//         view.innerHTML = html;
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }

@@ -32,10 +32,18 @@ class ServerControllers{
         res.render(`createAccountMenu`);
     }
 
-    sendMapMenuManage(req, res){
-        res.render(`mapMenuManage`);
+    sendPinSort(req, res){
+        res.render(`sort`);
     }
-
+    sendPinFind(req, res){
+        res.render(`find`);
+    }
+    sendPinCreate(req, res){
+        res.render(`create`);
+    }
+    sendPinManage(req, res){
+        res.render(`pinManage`);
+    }
     //Handling user login
     // app.post("/login", passport.authenticate("local", {
     //     successRedirect: "/secret",
