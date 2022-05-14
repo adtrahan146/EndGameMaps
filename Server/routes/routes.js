@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const {test, sendHomepage, sendNavbar, sendMapview} = require('../controllers/server.controllers.js');
+const {test, sendHomepage, sendNavbar, sendMapview, sendLoginMenu} = require('../controllers/server.controllers.js');
 
 
 router.get('/test', test);
 //todo
-router.get('/account/');
 router.get('/account/');
 router.get('/account/');
 
@@ -16,9 +15,11 @@ router.get('/mapMenu/manage/:pinID');
 router.get('/mapMenu/manage/:pinID');
 router.get('/mapMenu/manage/:pinID');
 
-//complete
+//views
 router.get('/views/homepage', sendHomepage);
 router.get('/views/mapview', sendMapview);
 router.get('/views/navbar', sendNavbar);
+router.get('/views/loginMenu', sendLoginMenu);
+
 
 module.exports = router;

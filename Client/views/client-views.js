@@ -1,23 +1,7 @@
+import Controls from '../controllers/client-controls.js';
 import OurMap from '../model/mapView.js';
 
 const BASE_URL = 'http://localhost:3000';
-
-export async function getHomepage(){
-    //Render homepage element
-    const view = document.getElementById('client-view');
-
-    const url = `${BASE_URL}/views/homepage`;
-    try {
-        const response = await fetch(url);
-        const html = await response.text();
-
-        view.innerHTML = html;
-        document.getElementById('guest-btn').addEventListener('click', getMapView);
-    } catch (error) {
-        view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
-    }
-
-}
 
 export async function getMapView(){
     try {
@@ -33,7 +17,6 @@ export async function getMapView(){
         const html = await response.text();
     
         navbarView.innerHTML = html;
-        // document.getElementById('navbar').addEventListener('click', getMapView);
     } catch (error) {
         console.log('ERROR.');
         view.innerHTML = `<h1>ERROR: Reload page in 2 seconds.</h1>`
@@ -41,3 +24,57 @@ export async function getMapView(){
     OurMap.initializeMap();
 }
 
+export async function getHomepage(){
+    //Render homepage element
+    const view = document.getElementById('client-view');
+
+    const url = `${BASE_URL}/views/homepage`;
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+        view.innerHTML = html;
+    } catch (error) {
+        view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
+    }
+
+    Controls.configureBtns();
+
+}
+
+export async function getLoginMenu(){
+    try {
+        //Render loginPage
+        const view = document.getElementById('selector');
+
+        const url = `${BASE_URL}/views/loginMenu`;
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            view.innerHTML = html;
+        } catch (error) {
+            view.innerHTML = `<h1>Oops! Sorry.</h1>`
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export async function getCreateAccountMenu(){
+    try {
+        
+        //Render CreateAccountMenu
+        const view = document.getElementById('client-view');
+
+        const url = `${BASE_URL}/views/homepage`;
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            view.innerHTML = html;
+        } catch (error) {
+            view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

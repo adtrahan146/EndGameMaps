@@ -22,6 +22,19 @@ class ServerControllers{
         res.render(`mapView`);
     }
 
+    //ACCOUNT
+    //LOGIN
+    sendLoginMenu(req, res){
+        res.render(`loginMenu`);
+    }
+
+    //Handling user login
+    // app.post("/login", passport.authenticate("local", {
+    //     successRedirect: "/secret",
+    //     failureRedirect: "/login"
+    // }), function (req, res) {
+    // });
+
 }
 
 module.exports = new ServerControllers();
