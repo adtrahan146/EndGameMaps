@@ -27,10 +27,10 @@ router.get('/views/mapview', sendMapview);
 router.get('/views/navbar', sendNavbar);
 router.get('/views/loginMenu', sendLoginMenu);
 router.get('/views/createAccountMenu', sendCreateAccountMenu);
-// router.get('/views/sort', sendPinSort);
-// router.get('/views/find', sendPinFind);
-// router.get('/views/create', sendPinCreate);
-// router.get('/views/pinManage', sendPinManage);
+router.get('/views/sort', sendPinSort);
+router.get('/views/find', sendPinFind);
+router.get('/views/create', sendPinCreate);
+router.get('/views/pinManage', sendPinManage);
 
 
 module.exports = router;
