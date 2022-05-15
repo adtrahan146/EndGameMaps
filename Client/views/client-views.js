@@ -134,6 +134,9 @@ export async function getPinCreate(){
         const response = await fetch(url);
         const html = await response.text();
         view.innerHTML = html;
+        // var alertPlaceholder = document.getElementById('liveAlertPlaceholder');
+        // var alertTrigger = document.getElementById('pinCreateSubmitBtn');
+        Controls.configurePinCreateBtns();
 
     } catch (error) {
         console.log(error);
@@ -157,3 +160,5 @@ export async function getPinManage(){
         console.log(error);
     }
 }
+
+

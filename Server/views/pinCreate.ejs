@@ -1,8 +1,9 @@
-<form action="/mapMenu/pinCreate" method="POST">
+<form action="http://localhost:3000/mapMenu/pinCreate" method="POST">
+    <div id="liveAlertPlaceholder"></div>
     <div class="form-group">
       <label for="pin-Name">Name</label> 
       <div class="input-group">
-        <input id="pin-Name" name="pin-Name" placeholder="Name of pin" type="text" required="required" class="form-control">
+        <input id="pin-Name" name="pinName" placeholder="Name of pin" type="text" required="required" class="form-control">
       </div>
     </div>
     <div class="form-group">
@@ -13,15 +14,15 @@
       <label>Pin Category</label> 
       <div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input name="pinCategory" id="pinCategory_0" type="checkbox" aria-describedby="pinCategoryHelpBlock" required="required" class="custom-control-input" value="niche"> 
+          <input name="pinCategory" id="pinCategory_0" type="checkbox" aria-describedby="pinCategoryHelpBlock" class="custom-control-input" value="niche"> 
           <label for="pinCategory_0" class="custom-control-label">Niche</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input name="pinCategory" id="pinCategory_1" type="checkbox" aria-describedby="pinCategoryHelpBlock" required="required" class="custom-control-input" value="oddity"> 
+          <input name="pinCategory" id="pinCategory_1" type="checkbox" aria-describedby="pinCategoryHelpBlock" class="custom-control-input" value="oddity"> 
           <label for="pinCategory_1" class="custom-control-label">Oddity</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-          <input name="pinCategory" id="pinCategory_2" type="checkbox" aria-describedby="pinCategoryHelpBlock" required="required" class="custom-control-input" value="firstEncounter"> 
+          <input name="pinCategory" id="pinCategory_2" type="checkbox" aria-describedby="pinCategoryHelpBlock" class="custom-control-input" value="firstEncounter"> 
           <label for="pinCategory_2" class="custom-control-label">First Encounter</label>
         </div> 
         <span id="pinCategoryHelpBlock" class="form-text text-muted">Choose one or more!</span>
@@ -32,7 +33,5 @@
       <textarea id="comments" name="comments" cols="40" rows="5" aria-describedby="commentsHelpBlock" class="form-control"></textarea> 
       <span id="commentsHelpBlock" class="form-text text-muted">Any additional comments that are relevant?</span>
     </div> 
-    <div class="form-group">
-      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-    </div>
+    <button id="pinCreateSubmitBtn" type="submit" class="btn btn-outline-light mt-4">Submit</button>
   </form>

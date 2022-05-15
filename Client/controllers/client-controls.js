@@ -32,6 +32,37 @@ class ClientControls{
         document.getElementById('get-login').addEventListener('click', viewFunctions.getLoginMenu);
         const guestBtn = document.getElementById('get-map').addEventListener('click', viewFunctions.getMapView);
     }
+
+
+//tried to do bootstrap alert, but wasnt able to close alert... if you wanna give it a go
+    configurePinCreateBtns = function(){
+        const pinCreateSubmit = document.getElementById('pinCreateSubmitBtn');
+        const formElem = document.querySelector('form');
+
+        formElem.addEventListener('submit', (e) => {
+            // on form submission, prevent default
+            e.preventDefault();
+          
+            // construct a FormData object, which fires the formdata event
+            const form = new FormData(formElem);
+            console.log(form)
+        });
+
+        pinCreateSubmit.addEventListener('submit', viewFunctions.getMapView);
+        
+        // function alert(message, type) {
+        //     var wrapper = document.createElement('div')
+        //     wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button></div>'
+
+        //     alertPlaceholder.append(wrapper)
+        // }
+
+        // if (alertTrigger) {
+        //     alertTrigger.addEventListener('click', function () {
+        //         alert('Nice, you triggered this alert message!', 'success')
+        //     })
+        // }
+    }
 }
 
 export default new ClientControls();

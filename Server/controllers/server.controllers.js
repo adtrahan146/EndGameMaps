@@ -51,6 +51,13 @@ class ServerControllers{
     // }), function (req, res) {
     // });
 
+    postPinCreate(req, res, next){
+        console.log("--->",req);
+
+
+
+        res.sendStatus(200);
+    }
 }
 
 module.exports = new ServerControllers();

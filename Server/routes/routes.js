@@ -6,7 +6,8 @@ const {test, sendHomepage,
     sendPinSort,
     sendPinManage,
     sendPinCreate,
-    sendPinFind} = require('../controllers/server.controllers.js');
+    sendPinFind,
+    postPinCreate} = require('../controllers/server.controllers.js');
 
 
 router.get('/test', test);
@@ -17,7 +18,7 @@ router.get('/account/');
 router.get('/login/loginSubmit');
 router.get('/login/createAccount');
 
-router.get('/mapMenu/manage/:pinID');
+router.post('/mapMenu/pinCreate', postPinCreate);
 router.get('/mapMenu/manage/:pinID');
 router.get('/mapMenu/manage/:pinID');
 
