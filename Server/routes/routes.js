@@ -29,7 +29,7 @@ router.get('/views/loginMenu', sendLoginMenu);
 router.get('/views/createAccountMenu', sendCreateAccountMenu);
 router.get('/views/sort', sendPinSort);
 router.get('/views/find', sendPinFind);
-router.get('/views/create', sendPinCreate);
+router.get('/views/pinCreate', sendPinCreate);
 router.get('/views/pinManage', sendPinManage);
 
 

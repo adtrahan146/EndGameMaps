@@ -39,7 +39,7 @@ class ServerControllers{
         res.render(`find`);
     }
     sendPinCreate(req, res){
-        res.render(`create`);
+        res.render(`pinCreate`);
     }
     sendPinManage(req, res){
         res.render(`pinManage`);
