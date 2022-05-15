@@ -45,7 +45,8 @@ class ClientControls{
           
             // construct a FormData object, which fires the formdata event
             const form = new FormData(formElem);
-            console.log(form)
+            
+            console.log(JSON.stringify(form));
         });
 
         pinCreateSubmit.addEventListener('submit', viewFunctions.getMapView);

@@ -56,7 +56,7 @@ class ServerControllers{
 
 
 
-        res.sendStatus(200);
+        res.end();
     }
 }
 
