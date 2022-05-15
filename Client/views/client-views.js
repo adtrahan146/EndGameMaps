@@ -85,7 +85,6 @@ export async function getCreateAccountMenu(){
 export async function getPinSort(){
     const view = document.getElementById('mapOutputView');
     if(view.innerHTML){
-        console.log(view.innerHTML)
         view.innerHTML = ``;
         return;
     }
@@ -106,7 +105,6 @@ export async function getPinFind(){
     
     const view = document.getElementById('mapOutputView');
     if(view.innerHTML){
-        console.log(view.innerHTML)
         view.innerHTML = ``;
         return;
     }
@@ -126,7 +124,6 @@ export async function getPinFind(){
 export async function getPinCreate(){
     const view = document.getElementById('mapOutputView');
     if(view.innerHTML){
-        console.log(view.innerHTML)
         view.innerHTML = ``;
         return;
     }
@@ -145,7 +142,6 @@ export async function getPinManage(){
 
     const view = document.getElementById('mapOutputView');
     if(view.innerHTML){
-        console.log(view.innerHTML)
         view.innerHTML = ``;
         return;
     }
