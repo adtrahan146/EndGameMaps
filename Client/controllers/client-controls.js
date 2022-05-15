@@ -22,6 +22,16 @@ class ClientControls{
         const manage = document.getElementById('manage-tab').addEventListener('click', viewFunctions.getPinManage);
     }
 
+    configureLoginBtns = function(){
+        document.getElementById('get-register').addEventListener('click', viewFunctions.getCreateAccountMenu);
+        const guestBtn = document.getElementById('get-map').addEventListener('click', viewFunctions.getMapView);
+
+    }
+    
+    configureRegisterBtns = function(){
+        document.getElementById('get-login').addEventListener('click', viewFunctions.getLoginMenu);
+        const guestBtn = document.getElementById('get-map').addEventListener('click', viewFunctions.getMapView);
+    }
 }
 
 export default new ClientControls();

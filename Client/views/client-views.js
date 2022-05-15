@@ -59,6 +59,7 @@ export async function getLoginMenu(){
     } catch (error) {
         console.log(error);
     }
+    Controls.configureLoginBtns();
 }
 
 
@@ -78,6 +79,7 @@ export async function getCreateAccountMenu(){
     } catch (error) {
         console.log(error);
     }
+    Controls.configureRegisterBtns();
 }
 
 
