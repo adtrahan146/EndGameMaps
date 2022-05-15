@@ -3,6 +3,7 @@ const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
+// const dotenv = require('dotenv');
 const routes = require('./routes/routes.js');
 
 const app = express();
@@ -13,6 +14,8 @@ start();
 
 
 function setup(){
+    app.set('view engine', 'ejs');
+
     app.use(express.static(path.join(__dirname, '/public')));
     // app.use(express.static(path.join(__dirname, '/views')));
     
@@ -20,8 +23,7 @@ function setup(){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
 
-    app.set("views", path.join(__dirname, "/views"));
-    app.set('view engine', 'ejs');
+
 
     app.use('/scripts', express.static(__dirname + '/node_modules'));
     app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
@@ -31,7 +33,7 @@ function setup(){
     
     app.use('/', routes);
 
-    // app.set('views', './views');
+    app.set("views", path.join(__dirname, "/views"));
 }
 
 function start(){

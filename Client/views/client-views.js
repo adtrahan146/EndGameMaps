@@ -80,27 +80,15 @@ export async function getCreateAccountMenu(){
     }
 }
 
-export async function getMapMenuManage(){
-    try {
-        //Render MapMenuManage from mapView.ejs
-        const view = document.getElementById('selector');
-
-        const url = `${BASE_URL}/views/mapMenuManage`;
-        try {
-            const response = await fetch(url);
-            const html = await response.text();
-            view.innerHTML = html;
-        } catch (error) {
-            view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 
 //MapMenu:
 export async function getPinSort(){
+    const view = document.getElementById('mapOutputView');
+    if(view.innerHTML){
+        console.log(view.innerHTML)
+        view.innerHTML = ``;
+        return;
+    }
     try {
         const view = document.getElementById('mapOutputView');
 
@@ -115,6 +103,13 @@ export async function getPinSort(){
 }
 
 export async function getPinFind(){
+    
+    const view = document.getElementById('mapOutputView');
+    if(view.innerHTML){
+        console.log(view.innerHTML)
+        view.innerHTML = ``;
+        return;
+    }
     try {
         const view = document.getElementById('mapOutputView');
 
@@ -129,9 +124,13 @@ export async function getPinFind(){
 }
 
 export async function getPinCreate(){
+    const view = document.getElementById('mapOutputView');
+    if(view.innerHTML){
+        console.log(view.innerHTML)
+        view.innerHTML = ``;
+        return;
+    }
     try {
-        const view = document.getElementById('mapOutputView');
-
         const url = `${BASE_URL}/views/pinCreate`;
         const response = await fetch(url);
         const html = await response.text();
@@ -143,9 +142,14 @@ export async function getPinCreate(){
 }
 
 export async function getPinManage(){
-    try {
-        const view = document.getElementById('mapOutputView');
 
+    const view = document.getElementById('mapOutputView');
+    if(view.innerHTML){
+        console.log(view.innerHTML)
+        view.innerHTML = ``;
+        return;
+    }
+    try {
         const url = `${BASE_URL}/views/pinManage`;
         const response = await fetch(url);
         const html = await response.text();
