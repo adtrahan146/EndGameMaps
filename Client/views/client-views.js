@@ -99,17 +99,59 @@ export async function getMapMenuManage(){
 }
 
 
-//MapMenuManage:
-// export async function getPinSort(){
-//     try {
-//         const view = document.getElementById('nav-sort');
+//MapMenu:
+export async function getPinSort(){
+    try {
+        const view = document.getElementById('mapOutputView');
 
-//         const url = `${BASE_URL}/views/sort`;
-//         const response = await fetch(url);
-//         const html = await response.text();
-//         view.innerHTML = html;
+        const url = `${BASE_URL}/views/sort`;
+        const response = await fetch(url);
+        const html = await response.text();
+        view.innerHTML = html;
 
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getPinFind(){
+    try {
+        const view = document.getElementById('mapOutputView');
+
+        const url = `${BASE_URL}/views/find`;
+        const response = await fetch(url);
+        const html = await response.text();
+        view.innerHTML = html;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getPinCreate(){
+    try {
+        const view = document.getElementById('mapOutputView');
+
+        const url = `${BASE_URL}/views/pinCreate`;
+        const response = await fetch(url);
+        const html = await response.text();
+        view.innerHTML = html;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getPinManage(){
+    try {
+        const view = document.getElementById('mapOutputView');
+
+        const url = `${BASE_URL}/views/pinManage`;
+        const response = await fetch(url);
+        const html = await response.text();
+        view.innerHTML = html;
+
+    } catch (error) {
+        console.log(error);
+    }
+}

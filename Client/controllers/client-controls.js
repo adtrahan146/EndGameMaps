@@ -22,6 +22,8 @@ class ClientControls{
         const manage = document.getElementById('manage-tab').addEventListener('click', viewFunctions.getPinManage);
     }
 
+    
+
     updatemenu = function(){
         if (document.getElementById('responsive-menu').checked == true) {
           document.getElementById('menu').style.borderBottomRightRadius = '0';
