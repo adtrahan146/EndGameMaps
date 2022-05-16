@@ -55,28 +55,30 @@ class OurMap{
 	}
 
 	startPinCreate = (e) =>{
-		this.addMarker(e);
-		
-		// var popup = L.popup();
-		// const marker = L.marker(); 
-		// marker.setLatLng(e.latlng);
-		// popup.setContent("You clicked the map at " + e.latlng.toString());
-		// marker.bindPopup(popup);
-		// marker.addTo(this.map);
-		if(document.getElementById('pinCreate')){
-			return;
-		}
-		viewFunctions.getPinCreate();
-	}
-	
-	addMarker(e) {
+
 		if (this.Marker) {
 			this.map.removeLayer(this.Marker);
 		}
+
 		// Add marker to map at click location; add popup window
+		// var popup = L.popup();
+		// popup.setContent("You clicked the map at " + e.latlng.toString());
+		// Marker.bindPopup(popup);
+
 		this.Marker = new L.marker(e.latlng, {
-		draggable: true
+			draggable: true
 		}).addTo(this.map);
+		
+		var pinCreate = document.getElementById('pinCreate');
+		var pinLocation = document.getElementById('pinLocation');
+		let coords = this.Marker.getLatLng();
+
+		if(pinCreate){
+			pinLocation.value = `${coords.lat} && ${coords.lng}`;
+			console.log(pinLocation.value)
+			return;
+		}
+		viewFunctions.getPinCreate();
 	}
 
 }
