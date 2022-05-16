@@ -37,19 +37,25 @@ class ClientControls{
 //tried to do bootstrap alert, but wasnt able to close alert... if you wanna give it a go
     configurePinCreateBtns = function(){
         const pinCreateSubmit = document.getElementById('pinCreateSubmitBtn');
-        const formElem = document.querySelector('form');
+        const formElem = document.getElementById('pinCreate');
 
         formElem.addEventListener('submit', (e) => {
             // on form submission, prevent default
             e.preventDefault();
+            const data = new FormData(e.target);
+
+            const pinName = data.get('pinName');
+            const pinLocation = data.get('pinLocation');
+            const pinCategory = data.get('pinCategory');
+            const comments = data.get('comments');
           
-            // construct a FormData object, which fires the formdata event
-            const form = new FormData(formElem);
-            
-            console.log(JSON.stringify(form));
+            console.log({ pinName, pinLocation, pinCategory, comments });
+
+            document.getElementById('mapOutputView').innerHTML = ``;
+            alert('Success!');
         });
 
-        pinCreateSubmit.addEventListener('submit', viewFunctions.getMapView);
+        // pinCreateSubmit.addEventListener('submit', viewFunctions.getMapView);
         
         // function alert(message, type) {
         //     var wrapper = document.createElement('div')

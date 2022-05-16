@@ -28,7 +28,7 @@ class OurMap{
 		this.map.addLayer(Esri_NatGeoWorldMap);
 
 		//Map Binding events
-		this.map.on('click', this.onMapClickTest);
+		this.map.on('click', this.startPinCreate);
 	}
 	
 	getUserCoords(){
@@ -47,7 +47,7 @@ class OurMap{
 		// Some other code here (does not affect the API)
 	}
 
-	onMapClickTest = (e) =>{
+	startPinCreate = (e) =>{
 		var popup = L.popup();
 		popup.setLatLng(e.latlng);
 		popup.setContent("You clicked the map at " + e.latlng.toString());

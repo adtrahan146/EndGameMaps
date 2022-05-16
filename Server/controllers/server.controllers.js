@@ -52,11 +52,11 @@ class ServerControllers{
     // });
 
     postPinCreate(req, res, next){
-        console.log("--->",req);
+        console.log("--->",req.body);
 
 
 
-        res.end();
+        return false;
     }
 }
 
