@@ -39,6 +39,7 @@ class OurMap{
 		this.map.on('click', this.startPinCreate);
 	}
 	
+	//Called to get coords to display users location
 	getUserCoords(){
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(this.getPosition);
@@ -47,6 +48,7 @@ class OurMap{
 		}
 	}
 
+	//return function from getUserCoords that gets users current location based on ISP addr.
 	getPosition = (position) => {
 
 		this.#position.latitude = position.coords.latitude;
@@ -55,6 +57,7 @@ class OurMap{
 		// Some other code here (does not affect the API)
 	}
 
+	//Called when clicked on map
 	startPinCreate = (e) =>{
 
 		if (this.Marker) {

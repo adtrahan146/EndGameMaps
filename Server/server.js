@@ -3,6 +3,7 @@ const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
+const cors = require('cors');
 // const dotenv = require('dotenv');
 const routes = require('./routes/routes.js');
 
@@ -19,7 +20,11 @@ function setup(){
 
     app.use(express.static(path.join(__dirname, '/public')));
     // app.use(express.static(path.join(__dirname, '/views')));
-    
+    app.use(cors({
+        methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
+        allowedHeaders: '*'
+    }));
+    app.options('*', cors());
     app.use(localhostHandler);
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));

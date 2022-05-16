@@ -36,10 +36,9 @@ class ClientControls{
 
 //tried to do bootstrap alert, but wasnt able to close alert... if you wanna give it a go
     configurePinCreateBtns = function(){
-        const pinCreateSubmit = document.getElementById('pinCreateSubmitBtn');
         const formElem = document.getElementById('pinCreate');
 
-        formElem.addEventListener('submit', (e) => {
+        formElem.addEventListener('submit', async(e) => {
             // on form submission, prevent default
             e.preventDefault();
             const data = new FormData(e.target);
@@ -49,7 +48,15 @@ class ClientControls{
             const pinCategory = data.get('pinCategory');
             const comments = data.get('comments');
           
-            console.log({ pinName, pinLocation, pinCategory, comments });
+            let jsonData = { pinName, pinLocation, pinCategory, comments };
+            jsonData = JSON.stringify(jsonData);
+
+            const response = await fetch('http://localhost:3000/mapMenu/pinCreate', {
+                method: 'POST', // or 'PUT',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'},
+                body: jsonData
+            });
 
             document.getElementById('mapOutputView').innerHTML = ``;
             alert('Success!');

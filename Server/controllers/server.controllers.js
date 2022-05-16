@@ -1,4 +1,5 @@
-var path = require('path');
+const path = require('path');
+const data = require('../models/data');
 
 class ServerControllers{
     
@@ -53,10 +54,9 @@ class ServerControllers{
 
     postPinCreate(req, res, next){
         console.log("--->",req.body);
-
-
-
-        return false;
+        const pinToAdd = req.body;
+        const currentPins = data.getAllPins();
+        res.send({ message: 'hey' });
     }
 }
 
