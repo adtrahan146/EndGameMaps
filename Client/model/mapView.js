@@ -1,5 +1,6 @@
 import * as viewFunctions from '../views/client-views.js';
 import * as mapAssets from './mapAssets.js';
+const BASE_URL = 'http://localhost:3000';
 
 class OurMap{
 
@@ -23,6 +24,7 @@ class OurMap{
 
 		//TODO: Take in user coords as params for setView()
 		this.map.setView([this.#position.latitude, this.#position.longitude], 11);
+		this.getAllPins();
 		
 		var userLoc = L.marker([this.#position.latitude, this.#position.longitude], {icon: mapAssets.goldIcon});
 		userLoc.bindPopup(`Your ISP says you're here! Sending goons now.`).openPopup();
@@ -57,6 +59,20 @@ class OurMap{
 		// Some other code here (does not affect the API)
 	}
 
+	getAllPins = async () =>{
+		try {
+			const view = document.getElementById('mapOutputView');
+	
+			const url = `${BASE_URL}/mapView/generatePins`;
+			const response = await fetch(url);
+			const pins = await response.json();
+			this.addPinsToMapView(pins);
+
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	//Called when clicked on map
 	startPinCreate = (e) =>{
 
@@ -83,6 +99,17 @@ class OurMap{
 			return;
 		}
 		viewFunctions.getPinCreate();
+	}
+
+	addPinsToMapView = (pins) =>{
+
+		for(let i=0; i<pins.length; i++){
+			var coords = pins[i].pinLocation.split(',');
+			var lat = coords[0];
+			var lng = coords[1];
+			var pin = L.marker([lat, lng]);
+			pin.addTo(this.map);
+		}
 	}
 
 }

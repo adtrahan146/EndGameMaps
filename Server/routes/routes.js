@@ -8,7 +8,8 @@ const {test, sendHomepage,
     sendPinManage,
     sendPinCreate,
     sendPinFind,
-    postPinCreate} = require('../controllers/server.controllers.js');
+    postPinCreate,
+    sendAllPinsToClient} = require('../controllers/server.controllers.js');
 
 router.get('/test', test);
 //todo
@@ -18,7 +19,9 @@ router.get('/account/');
 router.get('/login/loginSubmit');
 router.get('/login/createAccount');
 
-router.post('/mapMenu/pinCreate' ,postPinCreate);
+//Need to run profanity filter thru any POSTs
+router.post('/mapMenu/pinCreate', postPinCreate);
+
 router.get('/mapMenu/manage/:pinID');
 router.get('/mapMenu/manage/:pinID');
 
@@ -32,6 +35,7 @@ router.get('/views/sort', sendPinSort);
 router.get('/views/find', sendPinFind);
 router.get('/views/pinCreate', sendPinCreate);
 router.get('/views/pinManage', sendPinManage);
+router.get('/mapView/generatePins', sendAllPinsToClient);
 
 
 module.exports = router;

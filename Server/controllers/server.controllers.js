@@ -55,8 +55,13 @@ class ServerControllers{
     postPinCreate(req, res, next){
         console.log("--->",req.body);
         const pinToAdd = req.body;
-        const currentPins = data.getAllPins();
-        res.send({ message: 'hey' });
+        data.addToPins(pinToAdd);
+        res.status(400).end();
+    }
+    
+    sendAllPinsToClient(req, res){
+        const pins = data.getAllPins();
+        res.json(pins);
     }
 }
 
