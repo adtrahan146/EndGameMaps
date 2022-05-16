@@ -1,4 +1,5 @@
 import * as viewFunctions from '../views/client-views.js';
+import * as mapAssets from './mapAssets.js';
 
 class OurMap{
 
@@ -23,8 +24,8 @@ class OurMap{
 		//TODO: Take in user coords as params for setView()
 		this.map.setView([this.#position.latitude, this.#position.longitude], 11);
 		
-		var userLoc = L.marker([this.#position.latitude, this.#position.longitude]);
-		userLoc.bindPopup('Your Location').openPopup();
+		var userLoc = L.marker([this.#position.latitude, this.#position.longitude], {icon: mapAssets.goldIcon});
+		userLoc.bindPopup(`Your ISP says you're here! Sending goons now.`).openPopup();
 		userLoc.addTo(this.map);
 	
 		//National Geographic free map tiles that look nice on my weak eyes
@@ -74,7 +75,7 @@ class OurMap{
 		let coords = this.Marker.getLatLng();
 
 		if(pinCreate){
-			pinLocation.value = `${coords.lat} && ${coords.lng}`;
+			pinLocation.value = `${coords.lat},${coords.lng}`;
 			console.log(pinLocation.value)
 			return;
 		}
