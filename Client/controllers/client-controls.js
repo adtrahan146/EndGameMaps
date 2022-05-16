@@ -1,4 +1,5 @@
 import * as viewFunctions from '../views/client-views.js'
+import mapView from '../model/mapView.js';
 
 class ClientControls{
 
@@ -60,6 +61,8 @@ class ClientControls{
 
             document.getElementById('mapOutputView').innerHTML = ``;
             alert('Success!');
+            mapView.removeTempCreatePin();
+            mapView.getAllPins();
         });
 
         // pinCreateSubmit.addEventListener('submit', viewFunctions.getMapView);

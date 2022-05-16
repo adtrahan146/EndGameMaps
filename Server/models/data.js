@@ -11,7 +11,7 @@ class ServerData{
     constructor(){
         this.allPins = [{
             pinName: 'asd',
-            pinLocation: '29.999097714782373,-90.09972323106469',
+            pinLocation: '30.002442608871497,-90.08084345065278',
             pinCategory: null,
             comments: ''
           },

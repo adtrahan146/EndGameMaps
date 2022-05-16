@@ -7,6 +7,7 @@ class OurMap{
 	#position;
 	map;
 	Marker;
+	allPins;
 
 	constructor(){
 		this.#position = {
@@ -15,7 +16,7 @@ class OurMap{
 		};
 		this.Marker = L.marker();
 		this.getUserCoords();
-
+		this.allPins = [];
 	}
 	
 	initializeMap(){
@@ -73,12 +74,12 @@ class OurMap{
 		}
 	}
 	addPinsToMapView = (pins) =>{
-
 		for(let i=0; i<pins.length; i++){
 			var coords = pins[i].pinLocation.split(',');
 			var lat = coords[0];
 			var lng = coords[1];
 			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon});
+			this.allPins.push(pin);
 			pin.addTo(this.map);
 		}
 	}
@@ -105,10 +106,16 @@ class OurMap{
 
 		if(pinCreate){
 			pinLocation.value = `${coords.lat},${coords.lng}`;
-			console.log(pinLocation.value)
 			return;
 		}
 		viewFunctions.getPinCreate();
+	}
+
+	removeTempCreatePin(){
+		if(this.Marker){
+			this.map.removeLayer(this.Marker);
+		}
+		return;
 	}
 
 }

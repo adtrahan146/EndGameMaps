@@ -56,7 +56,7 @@ class ServerControllers{
         console.log("--->",req.body);
         const pinToAdd = req.body;
         data.addToPins(pinToAdd);
-        res.status(400).end();
+        res.end();
     }
     
     sendAllPinsToClient(req, res){
