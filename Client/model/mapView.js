@@ -72,6 +72,16 @@ class OurMap{
 			console.log(error);
 		}
 	}
+	addPinsToMapView = (pins) =>{
+
+		for(let i=0; i<pins.length; i++){
+			var coords = pins[i].pinLocation.split(',');
+			var lat = coords[0];
+			var lng = coords[1];
+			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon});
+			pin.addTo(this.map);
+		}
+	}
 
 	//Called when clicked on map
 	startPinCreate = (e) =>{
@@ -99,17 +109,6 @@ class OurMap{
 			return;
 		}
 		viewFunctions.getPinCreate();
-	}
-
-	addPinsToMapView = (pins) =>{
-
-		for(let i=0; i<pins.length; i++){
-			var coords = pins[i].pinLocation.split(',');
-			var lat = coords[0];
-			var lng = coords[1];
-			var pin = L.marker([lat, lng]);
-			pin.addTo(this.map);
-		}
 	}
 
 }
