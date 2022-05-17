@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
-const ejs = require('ejs');
+const passport = require('./models/passport-middleware');
 const cors = require('cors');
 // const dotenv = require('dotenv');
 const routes = require('./routes/routes.js');
@@ -28,7 +28,10 @@ function setup(){
     app.use(localhostHandler);
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
-
+    const sessionConfig = { secret: 'secret-word' , resave: false , saveUninitialized: true };
+    app.use(session(sessionConfig));
+    app.use(passport.initialize());
+    app.use(passport.session());
 
 
     app.use('/scripts', express.static(__dirname + '/node_modules'));

@@ -1,5 +1,6 @@
 const path = require('path');
 const data = require('../models/data');
+const passport = require('../models/passport-middleware.js');
 
 class ServerControllers{
     
@@ -9,8 +10,8 @@ class ServerControllers{
     }
 
     sendHomepage(req, res){
-        // res.sendFile(path.resolve('views/homepage.html'));
         res.render('homepage');
+        console.log(req.session.id);
         console.log(`homepage sent`);
     }
 
@@ -23,13 +24,13 @@ class ServerControllers{
         res.render(`mapView`);
     }
 
-    //ACCOUNT
-    //LOGIN
     sendLoginMenu(req, res){
+        console.log(req.session.id);
         res.render(`loginMenu`);
     }
 
     sendCreateAccountMenu(req, res){
+        console.log(req.session.id);
         res.render(`createAccountMenu`);
     }
 
@@ -62,6 +63,35 @@ class ServerControllers{
     sendAllPinsToClient(req, res){
         const pins = data.getAllPins();
         res.json(pins);
+    }
+
+
+    
+    //ACCOUNT
+    //LOGIN
+    postLogin(req, res, next){
+        // const config = {};
+        // console.log('hello')
+        // config.successRedirect = '/views/homepage';
+        // config.failureRedirect = '/views/loginMenu';
+        try {
+            const authHandler = passport.authenticate( 'local' , config );
+            authHandler ( req , res , next );     
+            res.redirect('/views/homepage');
+        } catch (error) {
+            res.redirect('/views/loginMenu');
+        }
+        
+    }
+    //register
+    postRegister(req, res){
+        try {  
+            const {name, email, password} = req.body;
+            data.addUser(name, email, password);
+            res.redirect('/views/loginMenu');
+        } catch (error) {
+            res.redirect('/views/createAccountMenu')
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 const BASE_URL = `http://localhost:3000`;
 const bcrypt = require('bcrypt');
+const shortid = require('shortid');
 
 class ServerData{
     //pin data model:
@@ -39,6 +40,19 @@ class ServerData{
         this.allPins.push(pinToAdd);
         console.log(this.allPins);
     }
+
+    addUser(name, email, password){
+        const id = shortid.generate();
+        const user = {id:id, name:name, email:email, password:password};
+        this.users.push(user);
+        console.log(this.users);
+    }
+
+    findUser( key , value ){
+        const user = this.users.find( item => item [ key ] === value );
+        return user;
+    } 
+       
 }
 
 module.exports = new ServerData();

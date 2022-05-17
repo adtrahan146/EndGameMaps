@@ -9,15 +9,16 @@ const {test, sendHomepage,
     sendPinCreate,
     sendPinFind,
     postPinCreate,
-    sendAllPinsToClient} = require('../controllers/server.controllers.js');
+    sendAllPinsToClient,
+    postLogin, postRegister} = require('../controllers/server.controllers.js');
 
 router.get('/test', test);
 //todo
-router.get('/account/');
-router.get('/account/');
+// router.post('/account/register', postRegister);
+// router.post('/account/login', postLogin);
 
-router.get('/login/loginSubmit');
-router.get('/login/createAccount');
+router.post('/login/loginSubmit', postLogin);
+router.post('/login/createAccount', postRegister);
 
 //Need to run profanity filter thru any POSTs
 router.post('/mapMenu/pinCreate', postPinCreate);
