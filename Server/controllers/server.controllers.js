@@ -1,6 +1,6 @@
 const path = require('path');
 const data = require('../models/data');
-const passport = require('../models/passport-middleware.js');
+const passport = require('../models/passport-middleware');
 
 class ServerControllers{
     
@@ -70,18 +70,12 @@ class ServerControllers{
     //ACCOUNT
     //LOGIN
     postLogin(req, res, next){
-        // const config = {};
-        // console.log('hello')
-        // config.successRedirect = '/views/homepage';
-        // config.failureRedirect = '/views/loginMenu';
-        try {
-            const authHandler = passport.authenticate( 'local' , config );
-            authHandler ( req , res , next );     
-            res.redirect('/views/homepage');
-        } catch (error) {
-            res.redirect('/views/loginMenu');
-        }
-        
+        const config = {};
+        config.successRedirect = '/views/homepage';
+        config.failureRedirect = '/views/loginMenu';
+        config.failureFlash = true;
+        const authHandler = passport.authenticate( 'local' , config );
+        authHandler(req, res, next); 
     }
     //register
     postRegister(req, res){

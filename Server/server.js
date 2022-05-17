@@ -2,9 +2,10 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
-const passport = require('./models/passport-middleware');
 const cors = require('cors');
+const flash = require('express-flash');
 // const dotenv = require('dotenv');
+const passport = require('./models/passport-middleware');
 const routes = require('./routes/routes.js');
 
 const app = express();
@@ -22,25 +23,26 @@ function setup(){
     // app.use(express.static(path.join(__dirname, '/views')));
     app.use(cors({
         methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
-        allowedHeaders: '*'
+        allowedHeaders: '*',
+        origin: '*'
     }));
     app.options('*', cors());
-    app.use(localhostHandler);
+    // app.use(localhostHandler);
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
     const sessionConfig = { secret: 'secret-word' , resave: false , saveUninitialized: true };
     app.use(session(sessionConfig));
+    app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
 
-
+    app.use('/', routes);
     app.use('/scripts', express.static(__dirname + '/node_modules'));
     app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
     app.use('/bootstrap-icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
     app.use('/assets', express.static(path.join(__dirname, '/public/assets')));
 
     
-    app.use('/', routes);
 
 }
 
@@ -51,7 +53,7 @@ function start(){
 
 //User defined middleware
 
-function localhostHandler(request, response, next){
-    response.header('Access-Control-Allow-Origin', '*');
-    next();
-}
+// function localhostHandler(request, response, next){
+//     response.header('Access-Control-Allow-Origin', '*');
+//     next();
+// }

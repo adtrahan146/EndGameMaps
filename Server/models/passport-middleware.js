@@ -5,16 +5,18 @@ const data = require('../models/data');
 
 async function authenticateUser(email, password, done){
     const user = data.findUser('email', email);
-    console.log('asdjsafdjasdfjlasdjf;laskdf;lasjdf')
 
-    if(user===undefined){
-        return done(null, false, {message: 'No user with that email'});
+    if ( user === undefined){
+        console.log ( "No user with that email" );
+        return done ();
     }
-    if(await bcrypt.compare(password, user.password)){
-        return done(null, user);
+    if ( password === user . password ){
+        console.log ( "User Authenticated" );
+        return done ();
     }
-    else{
-        return done(null, false, {message: "Password incorrect"});
+    else {
+        console.log ( "Password incorrect" );
+        return done ();
     }
 }
 

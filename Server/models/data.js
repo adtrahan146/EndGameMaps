@@ -52,7 +52,6 @@ class ServerData{
         const user = this.users.find( item => item [ key ] === value );
         return user;
     } 
-       
 }
 
 module.exports = new ServerData();
