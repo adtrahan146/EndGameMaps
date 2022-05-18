@@ -15,15 +15,14 @@ async function authenticateUser(email, password, done){
         console.log(error);
     }
 
-    if (user === undefined){
-        return done(null, false, {message: "No user with that email"});
+    if(user === undefined){
+        return done(null, false, {status: 404});
     }
     if(isPW){
         return done(null, user);
     }
-    else {
-        console.log(`provided PW: ${password}, actualPW: ${user.password}, bool: ${isPW}`);
-        return done(null, false, {message: "Password incorrect"});
+    else{
+        return done(null, false, {status: 200});
     }
 }
 

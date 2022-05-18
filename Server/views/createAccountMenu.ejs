@@ -1,5 +1,9 @@
 <h1>Register</h1>
 
+<% if(messages.error){ %>
+    <%= messages.error %>
+<% } %>
+
 <form id="createAccount" action="/login/createAccount" method="POST">
 
     <div>

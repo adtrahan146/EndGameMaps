@@ -2,7 +2,7 @@ exports.checkAuthenticated = function(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect('/views/loginMenu');
+    res.redirect('/views/homepage');
 }
 
 exports.checkNotAuthenticated = function(req, res, next){

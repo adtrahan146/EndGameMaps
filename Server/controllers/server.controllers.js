@@ -82,9 +82,9 @@ class ServerControllers{
         try {  
             const {name, email, password} = req.body;
             data.addUser(name, email, password);
-            res.redirect('/views/loginMenu');
+            res.status(200).send();
         } catch (error) {
-            res.redirect('/views/createAccountMenu')
+            res.status(400).send();
         }
     }
 }

@@ -17,9 +17,9 @@ router.get('/test', test);
 //todo
 // router.post('/account/register', postRegister);
 // router.post('/account/login', postLogin);
-
-router.post('/login/loginSubmit', postLogin);
-router.post('/login/createAccount', postRegister);
+ 
+router.post('/login/loginSubmit', checkNotAuthenticated, postLogin);
+router.post('/login/createAccount', checkNotAuthenticated, postRegister);
 
 //Need to run profanity filter thru any POSTs
 router.post('/mapMenu/pinCreate', postPinCreate);

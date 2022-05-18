@@ -44,10 +44,13 @@ class ClientControls{
                 headers: {'Content-Type': 'application/json'},
                 body: jsonData
             });
-            console.log(response.body);
-
-            alert('Success!');
-            viewFunctions.getMapView();
+            if(response.status === 200){
+                viewFunctions.getMapView();
+            }else{
+                alert('An Error Occurred...');
+                viewFunctions.getLoginMenu();
+            }
+            
         });
 
         document.getElementById('get-register').addEventListener('click', viewFunctions.getCreateAccountMenu);
@@ -77,8 +80,13 @@ class ClientControls{
                 body: jsonData
             });
 
-            alert('Success!');
-            viewFunctions.getLoginMenu();
+            if(response.status === 200){
+                alert('Success!');
+                viewFunctions.getLoginMenu();
+            }else{
+                console.log(response.body);
+            }
+            
         });
 
         document.getElementById('get-login').addEventListener('click', viewFunctions.getLoginMenu);
