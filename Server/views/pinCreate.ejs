@@ -1,16 +1,17 @@
-<form id="pinCreate" action="http://localhost:3000/mapMenu/pinCreate" method="POST">
+<div class="container">
+  <form id="pinCreate" action="http://localhost:3000/mapMenu/pinCreate" method="POST">
     <div id="liveAlertPlaceholder"></div>
     <div class="form-group">
-      <label for="pinName">Name</label> 
+      <label for="pinName" class="mt-4">Name</label> 
       <div class="input-group">
-        <input id="pinName" name="pinName" placeholder="Name of pin" type="text" required="required" class="form-control">
+        <input id="pinName" name="pinName" placeholder="Name of Pin" type="text" required="required" class="form-control">
       </div>
     </div>
     <div class="form-group">
-      <label for="pinLocation">Location</label> 
-      <input id="pinLocation" name="pinLocation" placeholder="click the map!" type="text" required="required" class="form-control">
+      <label for="pinLocation" class="mt-4">Location</label> 
+      <input id="pinLocation" name="pinLocation" placeholder="Click the map!" type="text" required="required" class="form-control">
     </div>
-    <div class="form-group">
+    <div class="form-group mt-4">
       <label>Pin Category</label> 
       <div>
         <div class="custom-control custom-checkbox custom-control-inline">
@@ -28,10 +29,11 @@
         <span id="pinCategoryHelpBlock" class="form-text text-muted">Choose one or more!</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-4">
       <label for="comments">Additional Pin Comments</label> 
       <textarea id="comments" name="comments" cols="40" rows="5" aria-describedby="commentsHelpBlock" class="form-control"></textarea> 
       <span id="commentsHelpBlock" class="form-text text-muted">Any additional comments that are relevant?</span>
     </div> 
-    <button id="pinCreateSubmitBtn" type="submit" class="btn btn-outline-light mt-4">Submit</button>
+    <button id="pinCreateSubmitBtn" type="submit" class="btn btn-outline-light mt-4 w-100">Submit</button>
   </form>
+</div>

@@ -11,4 +11,13 @@ html, body {
  body{
     padding: 0;
     margin: 0;
- }
+}
+
+hr{
+   width: 55%;
+   margin: auto;
+}
+
+.maps-font{
+   font-family: 'Cutive Mono', monospace;
+}
