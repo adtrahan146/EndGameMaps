@@ -12,17 +12,17 @@ async function authenticateUser(email, password, done){
         console.log(`provided PW: ${password}, actualPW: ${user.password}, bool: ${isPW}`);
 
     } catch (error) {
-        console.log(error);
+        console.log('no user');
     }
 
     if(user === undefined){
-        return done(null, false, {status: 404});
+        return done(null, false, {message: 'no email'});
     }
     if(isPW){
-        return done(null, user);
+        return done(null, user, {status: 200});
     }
     else{
-        return done(null, false, {status: 200});
+        return done(null, false, {message: 'wrong pw'});
     }
 }
 

@@ -71,10 +71,10 @@ class ServerControllers{
     //LOGIN
     postLogin(req, res, next){
         const config = {};
-        config.successRedirect = '/views/homepage';
-        config.failureRedirect = '/views/loginMenu';
+        // config.successRedirect = '/views/homepage';
+        // config.failureRedirect = '/views/loginMenu';
         config.failureFlash = true;
-        const authHandler = passport.authenticate( 'local' , config );
+        const authHandler = passport.authenticate('local', config );
         authHandler(req, res, next); 
     }
     //register
