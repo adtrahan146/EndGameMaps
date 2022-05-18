@@ -11,8 +11,8 @@ class ServerControllers{
 
     sendHomepage(req, res){
         res.render('homepage');
+        //can use this to send data w/homepage: { name: req.user.name }
         console.log(req.session.id);
-        console.log(`homepage sent`);
     }
 
     sendNavbar(req, res){

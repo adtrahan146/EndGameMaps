@@ -24,12 +24,63 @@ class ClientControls{
     }
 
     configureLoginBtns = function(){
+        const formElem = document.getElementById('login');
+
+        formElem.addEventListener('submit', async(e) => {
+            // on form submission, prevent default
+            e.preventDefault();
+            const data = new FormData(e.target);
+
+            // const name = data.get('name');
+            const email = data.get('email');
+            const password = data.get('password');
+          
+            let jsonData = { email, password };
+            jsonData = JSON.stringify(jsonData);
+
+            const response = await fetch('http://localhost:3000/login/loginSubmit', {
+                method: 'POST', // or 'PUT',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'},
+                body: jsonData
+            });
+            console.log(response.body);
+
+            alert('Success!');
+            viewFunctions.getMapView();
+        });
+
         document.getElementById('get-register').addEventListener('click', viewFunctions.getCreateAccountMenu);
         const guestBtn = document.getElementById('get-map').addEventListener('click', viewFunctions.getMapView);
 
     }
     
     configureRegisterBtns = function(){
+        const formElem = document.getElementById('createAccount');
+
+        formElem.addEventListener('submit', async(e) => {
+            // on form submission, prevent default
+            e.preventDefault();
+            const data = new FormData(e.target);
+
+            const name = data.get('name');
+            const email = data.get('email');
+            const password = data.get('password');
+          
+            let jsonData = { name, email, password };
+            jsonData = JSON.stringify(jsonData);
+
+            const response = await fetch('http://localhost:3000/login/createAccount', {
+                method: 'POST', // or 'PUT',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'},
+                body: jsonData
+            });
+
+            alert('Success!');
+            viewFunctions.getLoginMenu();
+        });
+
         document.getElementById('get-login').addEventListener('click', viewFunctions.getLoginMenu);
         const guestBtn = document.getElementById('get-map').addEventListener('click', viewFunctions.getMapView);
     }

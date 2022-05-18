@@ -11,6 +11,7 @@ const {test, sendHomepage,
     postPinCreate,
     sendAllPinsToClient,
     postLogin, postRegister} = require('../controllers/server.controllers.js');
+const {checkAuthenticated, checkNotAuthenticated} = require('../models/auth');
 
 router.get('/test', test);
 //todo
@@ -30,13 +31,13 @@ router.get('/mapMenu/manage/:pinID');
 router.get('/views/homepage', sendHomepage);
 router.get('/views/mapview', sendMapview);
 router.get('/views/navbar', sendNavbar);
-router.get('/views/loginMenu', sendLoginMenu);
-router.get('/views/createAccountMenu', sendCreateAccountMenu);
+router.get('/views/loginMenu', checkNotAuthenticated, sendLoginMenu);
+router.get('/views/createAccountMenu', checkNotAuthenticated, sendCreateAccountMenu);
 router.get('/views/sort', sendPinSort);
 router.get('/views/find', sendPinFind);
-router.get('/views/pinCreate', sendPinCreate);
-router.get('/views/pinManage', sendPinManage);
-router.get('/mapView/generatePins', sendAllPinsToClient);
+router.get('/views/pinCreate', checkNotAuthenticated, sendPinCreate);
+router.get('/views/pinManage', checkNotAuthenticated, sendPinManage);
+router.get('/mapView/generatePins', checkNotAuthenticated, sendAllPinsToClient);
 
 
 module.exports = router;

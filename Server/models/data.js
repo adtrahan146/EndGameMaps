@@ -41,9 +41,10 @@ class ServerData{
         console.log(this.allPins);
     }
 
-    addUser(name, email, password){
+    async addUser(name, email, password){
         const id = shortid.generate();
-        const user = {id:id, name:name, email:email, password:password};
+        const hashedPassword = await bcrypt.hash( password , 10 ); 
+        const user = {id:id, name:name, email:email, password:hashedPassword};
         this.users.push(user);
         console.log(this.users);
     }
