@@ -13,27 +13,6 @@ class ServerData{
     //pinCategory: "categories,..,",
     //comments: "comments"
 
-    constructor(){
-        this.allPins = [{
-            pinName: 'asd',
-            pinLocation: '30.002442608871497,-90.08084345065278',
-            pinCategory: null,
-            comments: ''
-          },
-          {
-            pinName: 'test!!!!!!!',
-            pinLocation: '29.999097714782373,-90.09972323106423',
-            pinCategory: null,
-            comments: ''
-          },
-          {
-            pinName: 'metairie',
-            pinLocation: '29.988839336608084,-90.11756667836934',
-            pinCategory: 'niche',
-            comments: 'wow it works'
-          }];
-    }
-
     async getAllPins(){
         const list = await Pin.find({});
         console.log(list)

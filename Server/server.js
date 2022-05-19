@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const flash = require('express-flash');
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv').config();
 const passport = require('./models/passport-middleware');
 const routes = require('./routes/routes.js');
 
