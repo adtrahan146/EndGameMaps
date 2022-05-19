@@ -67,6 +67,7 @@ class ServerControllers{
     async postPinCreate(req, res, next){
         var pinToAdd = new Pin(req.body);
         await data.addToPins(pinToAdd);
+        res.json(pinToAdd);
     }
     
     async sendAllPinsToClient(req, res){
