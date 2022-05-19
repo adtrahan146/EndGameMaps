@@ -1,6 +1,6 @@
 # EndGameMaps 🗺️
 
-#####  :round_pushpin: An app to by and for denizens of their respective cities to find cool or off-the-radar spots/activites!
+#####  :round_pushpin: An app by and for denizens of their respective cities to find cool or off-the-radar spots/activites!
 
 ### What? 
 - The idea for the name comes from games, wherein a player has finished an area of a map or the whole map.
