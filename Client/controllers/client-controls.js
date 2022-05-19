@@ -7,6 +7,13 @@ class ClientControls{
         const loginBtn = document.getElementById('login-btn').addEventListener('click', viewFunctions.getLoginMenu);
         const registerBtn = document.getElementById('register-btn').addEventListener('click', viewFunctions.getCreateAccountMenu);
         const guestBtn = document.getElementById('guest-btn').addEventListener('click', viewFunctions.getMapView);
+        
+        //test
+        // const readId = document.getElementById('readOneId').addEventListener('click', this.testUpdate);
+        // const deleteTest = document.getElementById('testDelete').addEventListener('click', this.testDelete);
+        // const testLogin = document.getElementById('testLogin').addEventListener('click', this.testLogin);
+        // const specialTest = document.getElementById('specialTest').addEventListener('click', this.testAuth);
+
     }
 
     configureNavbarBtns = function(){
@@ -31,26 +38,30 @@ class ClientControls{
             e.preventDefault();
             const data = new FormData(e.target);
 
-            // const name = data.get('name');
             const email = data.get('email');
             const password = data.get('password');
-          
-            let jsonData = { email, password };
-            jsonData = JSON.stringify(jsonData);
+            const config = new Object();
+            // let jsonData = { email, password };
 
-            const response = await fetch('http://localhost:3000/login/loginSubmit', {
-                method: 'POST', // or 'PUT',
-                mode: 'cors',
-                headers: {'Content-Type': 'application/json'},
-                body: jsonData
-            });
-            if(response.status === 200){
-                viewFunctions.getMapView();
-            }else{
-                alert('An Error Occurred...');
-                viewFunctions.getLoginMenu();
+            config.method = "POST";
+            config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
+            config.body = JSON.stringify({email, password});
+
+            let response;
+            let jsonResponse;
+            try {
+                response = await fetch("http://localhost:3000/login/loginSubmit", config);
+                jsonResponse = await response.json();
+                if(jsonResponse.token){
+                    sessionStorage.token = jsonResponse.token;
+                    viewFunctions.getMapView();
+                }else{
+                    alert(jsonResponse.msg);
+                }
+            }catch(error) {
+                alert('There was an issue trying to login.');
             }
-            
+            // document.getElementById('selector')
         });
 
         document.getElementById('get-register').addEventListener('click', viewFunctions.getCreateAccountMenu);
@@ -58,7 +69,7 @@ class ClientControls{
 
     }
     
-    configureRegisterBtns = function(){
+    configureRegisterBtns = async function(){
         const formElem = document.getElementById('createAccount');
 
         formElem.addEventListener('submit', async(e) => {
@@ -69,24 +80,23 @@ class ClientControls{
             const name = data.get('name');
             const email = data.get('email');
             const password = data.get('password');
-          
-            let jsonData = { name, email, password };
-            jsonData = JSON.stringify(jsonData);
+            const config = new Object();
 
-            const response = await fetch('http://localhost:3000/login/createAccount', {
-                method: 'POST', // or 'PUT',
-                mode: 'cors',
-                headers: {'Content-Type': 'application/json'},
-                body: jsonData
-            });
+            config.method = "POST";
+            config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
+            config.body = JSON.stringify({name, email, password});
 
-            if(response.status === 200){
-                alert('Success!');
-                viewFunctions.getLoginMenu();
-            }else{
-                console.log(response.body);
+            let response;
+            let jsonResponse;
+            try {
+                response = await fetch("http://localhost:3000/login/createAccount", config);
+                jsonResponse = await response.json();
+            }catch(error) {
+                alert('There was an issue creating your account.');
             }
             
+            document.getElementById('serverMsgField').innerHTML += `<p>${JSON.stringify(jsonResponse)}</p>`
+            document.getElementById('selector').innerHTML = viewFunctions.getLoginMenu();
         });
 
         document.getElementById('get-login').addEventListener('click', viewFunctions.getLoginMenu);
@@ -94,8 +104,8 @@ class ClientControls{
     }
 
 
-//tried to do bootstrap alert, but wasnt able to close alert... if you wanna give it a go
-    configurePinCreateBtns = function(){
+    //tried to do bootstrap alert, but wasnt able to close alert... if you wanna give it a go
+    configurePinCreateBtns = async function(){
         const formElem = document.getElementById('pinCreate');
 
         formElem.addEventListener('submit', async(e) => {
@@ -108,36 +118,80 @@ class ClientControls{
             const pinCategory = data.get('pinCategory');
             const comments = data.get('comments');
           
-            let jsonData = { pinName, pinLocation, pinCategory, comments };
-            jsonData = JSON.stringify(jsonData);
+            const jsonData = JSON.stringify({pinName, pinLocation, pinCategory, comments});
 
-            const response = await fetch('http://localhost:3000/mapMenu/pinCreate', {
-                method: 'POST', // or 'PUT',
-                mode: 'cors',
-                headers: {'Content-Type': 'application/json'},
-                body: jsonData
-            });
-
+            try {
+                const config = new Object();
+                config.method = "POST";
+                config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
+                config.body = JSON.stringify({pinName, pinLocation, pinCategory, comments});
+                const response = await fetch('http://localhost:3000/mapMenu/pinCreate', config);
+            } catch (error) {
+                
+            }
             document.getElementById('mapOutputView').innerHTML = ``;
             alert('Success!');
             mapView.removeTempCreatePin();
             mapView.getAllPins();
         });
+    }
 
-        // pinCreateSubmit.addEventListener('submit', viewFunctions.getMapView);
-        
-        // function alert(message, type) {
-        //     var wrapper = document.createElement('div')
-        //     wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button></div>'
-
-        //     alertPlaceholder.append(wrapper)
-        // }
-
-        // if (alertTrigger) {
-        //     alertTrigger.addEventListener('click', function () {
-        //         alert('Nice, you triggered this alert message!', 'success')
-        //     })
-        // }
+    async testReadAll(){
+        const config = new Object();
+        config.method = "GET";
+        const response = await fetch("http://localhost:3000/getuser", config);
+        const data = await response.json()
+        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
+    }
+    async testRead(){
+        const config = new Object();
+        config.method = "GET";
+        const response = await fetch(`http://localhost:3000/get/${readId.value}`, config);
+        const data = await response.json()
+        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
+    }
+    async testCreate(){
+        const config = new Object();
+        config.method = "POST";
+        config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
+        config.body = JSON.stringify({'email': email.value, 'password': password.value});
+        const response = await fetch("http://localhost:3000/login/createAccount", config);
+        const data = await response.json()
+        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`
+    }
+    async testUpdate(){
+        const config = new Object();
+        config.method = "PUT";
+        config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
+        config.body = JSON.stringify({'email': updateEmail.value, 'password': updatePassword.value});
+        const response = await fetch(`http://localhost:3000/update/${readId.value}`, config);
+        const data = await response.json()
+        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`
+    }
+    async testDelete(){
+        const config = new Object();
+        config.method = "DELETE";
+        const response = await fetch(`http://localhost:3000/delete/${deleteId.value}`, config);
+        const data = await response.json()
+        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`
+    }
+    async testLogin(){
+        const config = new Object();
+        config.method = "POST";
+        config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
+        config.body = JSON.stringify({'email': loginId.value, 'password': loginPassword.value});
+        const response = await fetch("http://localhost:3000/login/loginSubmit", config);
+        const data = await response.json();
+        sessionStorage.token = data.token;
+        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`;
+    }
+    async testAuth(){
+        const config = {};
+        config.method = "GET";
+        config.headers = {"Authorization": 'Bearer ' + sessionStorage.getItem('token')}
+        const response = await fetch("http://localhost:3000/special", config);
+        const data = await response.json()
+        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
     }
 }
 

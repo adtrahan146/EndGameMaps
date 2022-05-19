@@ -19,13 +19,13 @@ class OurMap{
 		this.allPins = [];
 	}
 	
-	initializeMap(){
+	async initializeMap(){
 
 		this.map = L.map('map');
 
 		//TODO: Take in user coords as params for setView()
 		this.map.setView([this.#position.latitude, this.#position.longitude], 11);
-		this.getAllPins();
+		await this.getAllPins();
 		
 		var userLoc = L.marker([this.#position.latitude, this.#position.longitude], {icon: mapAssets.goldIcon});
 		userLoc.bindPopup(`Your ISP says you're here! Sending goons now.`).openPopup();
@@ -61,12 +61,11 @@ class OurMap{
 	}
 
 	getAllPins = async () =>{
-		try {
-			const view = document.getElementById('mapOutputView');
-	
+		try {	
 			const url = `${BASE_URL}/mapView/generatePins`;
 			const response = await fetch(url);
 			const pins = await response.json();
+			console.log(pins)
 			this.addPinsToMapView(pins);
 
 		} catch (error) {
@@ -79,6 +78,7 @@ class OurMap{
 			var lat = coords[0];
 			var lng = coords[1];
 			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon});
+			pin.bindPopup(`<i>Name</i>: ${pins[i].pinName}<br><i>Category:</i> ${pins[i].pinCategory}<br><i>User Comments: </i>${pins[i].comments}<br>`).openPopup();
 			this.allPins.push(pin);
 			pin.addTo(this.map);
 		}
@@ -90,6 +90,10 @@ class OurMap{
 		if (this.Marker) {
 			this.map.removeLayer(this.Marker);
 		}
+		// if(!sessionStorage.token || sessionStorage===''){
+		// 	alert('You must make an account first!');
+		// 	return;
+		// }
 
 		// Add marker to map at click location; add popup window
 		// var popup = L.popup();
@@ -100,8 +104,8 @@ class OurMap{
 			draggable: true
 		}).addTo(this.map);
 		
-		var pinCreate = document.getElementById('pinCreate');
-		var pinLocation = document.getElementById('pinLocation');
+		let pinCreate = document.getElementById('pinCreate');
+		let pinLocation = document.getElementById('pinLocation');
 		let coords = this.Marker.getLatLng();
 
 		if(pinCreate){

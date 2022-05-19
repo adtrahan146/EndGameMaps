@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var cors = require('cors');
+const express = require('express');
+const router = express.Router();
+const cors = require('cors');
 const {test, sendHomepage, 
     sendNavbar, sendMapview, 
     sendLoginMenu, sendCreateAccountMenu,
@@ -10,16 +10,24 @@ const {test, sendHomepage,
     sendPinFind,
     postPinCreate,
     sendAllPinsToClient,
-    postLogin, postRegister} = require('../controllers/server.controllers.js');
+    postLogin, postRegister,
+    getuserGET, userGET, updateuserPUT,
+    deleteuserDELETE,
+    verifyToken,
+    specialGET} = require('../controllers/server.controllers.js');
 const {checkAuthenticated, checkNotAuthenticated} = require('../models/auth');
+
 
 router.get('/test', test);
 //todo
-// router.post('/account/register', postRegister);
-// router.post('/account/login', postLogin);
  
-router.post('/login/loginSubmit', checkNotAuthenticated, postLogin);
-router.post('/login/createAccount', checkNotAuthenticated, postRegister);
+router.post('/login/loginSubmit', postLogin);
+router.post('/login/createAccount', postRegister);
+
+router.put('/update/:id', updateuserPUT);
+
+router.delete('/delete/:id', deleteuserDELETE);
+
 
 //Need to run profanity filter thru any POSTs
 router.post('/mapMenu/pinCreate', postPinCreate);
@@ -31,13 +39,17 @@ router.get('/mapMenu/manage/:pinID');
 router.get('/views/homepage', sendHomepage);
 router.get('/views/mapview', sendMapview);
 router.get('/views/navbar', sendNavbar);
-router.get('/views/loginMenu', checkNotAuthenticated, sendLoginMenu);
-router.get('/views/createAccountMenu', checkNotAuthenticated, sendCreateAccountMenu);
+router.get('/views/loginMenu', sendLoginMenu);
+router.get('/views/createAccountMenu', sendCreateAccountMenu);
 router.get('/views/sort', sendPinSort);
 router.get('/views/find', sendPinFind);
-router.get('/views/pinCreate', checkNotAuthenticated, sendPinCreate);
-router.get('/views/pinManage', checkNotAuthenticated, sendPinManage);
-router.get('/mapView/generatePins', checkNotAuthenticated, sendAllPinsToClient);
+router.get('/views/pinCreate', sendPinCreate);
+router.get('/views/pinManage', sendPinManage);
+router.get('/mapView/generatePins', sendAllPinsToClient);
 
+
+router.get('/getuser', verifyToken, getuserGET);
+router.get('/get/:id', userGET);
+router.get('/special', verifyToken, specialGET);
 
 module.exports = router;

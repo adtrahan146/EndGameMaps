@@ -10,12 +10,22 @@ const routes = require('./routes/routes.js');
 
 const app = express();
 const port = 3000 || process.env.port;
+const {database} = require('./models/database');
+const mongoose = require('mongoose');
+const mongoose_config = {useNewUrlParser: true, useUnifiedTopology: true};
+const connection = mongoose.connect(database, mongoose_config);
 
 setup();
 start();
 
 
 function setup(){
+    if(connection){
+        console.log('success')
+    }else{
+        console.log('eror')
+    }
+
     app.set('view engine', 'ejs');
     app.set("views", path.join(__dirname, "/views"));
 
@@ -29,12 +39,12 @@ function setup(){
     app.options('*', cors());
     // app.use(localhostHandler);
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: false}));
-    const sessionConfig = { secret: 'secret-word' , resave: false , saveUninitialized: true };
+    app.use(bodyParser.urlencoded({extended: true}));
+    const sessionConfig = { secret: 'xela123' , resave: false , saveUninitialized: true };
     app.use(session(sessionConfig));
     app.use(flash());
     app.use(passport.initialize());
-    app.use(passport.session());
+    // app.use(passport.session());
 
     app.use('/', routes);
     app.use('/scripts', express.static(__dirname + '/node_modules'));

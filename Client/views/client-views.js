@@ -28,6 +28,10 @@ export async function getMapView(){
 
 export async function getHomepage(){
     //Render homepage element
+    // if(sessionStorage.token){
+    //     getMapView();
+    //     return;
+    // }
     const view = document.getElementById('client-view');
 
     const url = `${BASE_URL}/views/homepage`;
