@@ -134,8 +134,10 @@ export async function getPinCreate(){
         return;
     }
     try {
+        let config = compareTokens();
         const url = `${BASE_URL}/views/pinCreate`;
-        const response = await fetch(url);
+        console.log(config)
+        const response = await fetch(url, config);
         const html = await response.text();
         view.innerHTML = html;
         // var alertPlaceholder = document.getElementById('liveAlertPlaceholder');
@@ -165,4 +167,11 @@ export async function getPinManage(){
     }
 }
 
+function compareTokens(){
+    const config = { };
+    config.method = "GET";
+    config.headers = {"authorization": 'Bearer ' + sessionStorage.getItem('token')};
+    console.log(config)
+    return config;
+}
 

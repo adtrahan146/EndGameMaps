@@ -40,12 +40,11 @@ class ClientControls{
 
             const email = data.get('email');
             const password = data.get('password');
-            const config = new Object();
-            // let jsonData = { email, password };
 
+            const config = new Object();
             config.method = "POST";
             config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
-            config.body = JSON.stringify({email, password});
+            config.body = JSON.stringify({'email': email, 'password': password});
 
             let response;
             let jsonResponse;
@@ -80,11 +79,13 @@ class ClientControls{
             const name = data.get('name');
             const email = data.get('email');
             const password = data.get('password');
+
+
             const config = new Object();
 
             config.method = "POST";
             config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
-            config.body = JSON.stringify({name, email, password});
+            config.body = JSON.stringify({'name': name, 'email': email, 'password': password});
 
             let response;
             let jsonResponse;
@@ -96,11 +97,11 @@ class ClientControls{
             }
             
             document.getElementById('serverMsgField').innerHTML += `<p>${JSON.stringify(jsonResponse)}</p>`
-            document.getElementById('selector').innerHTML = viewFunctions.getLoginMenu();
+            // document.getElementById('selector').innerHTML = viewFunctions.getLoginMenu();
         });
 
         document.getElementById('get-login').addEventListener('click', viewFunctions.getLoginMenu);
-        const guestBtn = document.getElementById('get-map').addEventListener('click', viewFunctions.getMapView);
+        document.getElementById('get-map').addEventListener('click', viewFunctions.getMapView);
     }
 
 
@@ -155,9 +156,9 @@ class ClientControls{
         config.method = "POST";
         config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
         config.body = JSON.stringify({'email': email.value, 'password': password.value});
-        const response = await fetch("http://localhost:3000/login/createAccount", config);
+        const response = await fetch("http://localhost:3000//login/createAccount", config);
         const data = await response.json()
-        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`
+        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
     }
     async testUpdate(){
         const config = new Object();

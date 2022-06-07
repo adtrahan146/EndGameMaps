@@ -45,7 +45,9 @@ class OurMap{
 	//Called to get coords to display users location
 	getUserCoords(){
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(this.getPosition);
+			navigator.geolocation.getCurrentPosition(this.getPosition, null, (e) =>{
+				enableHighAccuracy: true
+			});
 		}else{
 			return;
 		}
@@ -65,7 +67,6 @@ class OurMap{
 			const url = `${BASE_URL}/mapView/generatePins`;
 			const response = await fetch(url);
 			const pins = await response.json();
-			console.log(pins)
 			this.addPinsToMapView(pins);
 
 		} catch (error) {

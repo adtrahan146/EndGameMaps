@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const userSchema = new Schema({         //make a new instance of Schema
     name: {type: String, required: true},
     email: {type: String, required: true},                      //define collection's fields & types
-    // password: {type: String, required: true}
+    password: {type: String, required: true}
 });
 
 

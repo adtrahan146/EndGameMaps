@@ -1,7 +1,7 @@
 const BASE_URL = `http://localhost:3000`;
 const bcrypt = require('bcrypt');
 const shortid = require('shortid');
-const Pin = require('../models/Pin');
+const Pin = require('./Pin');
 
 
 //Holds methods for contacting mongodb and for dev purposes holds the DB data
