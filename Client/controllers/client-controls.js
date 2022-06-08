@@ -10,6 +10,7 @@ class ClientControls{
             const guestBtn = document.getElementById('guest-btn').addEventListener('click', viewFunctions.getMapView);
         } catch (error) {
             const startBtn = document.getElementById('start-btn').addEventListener('click', viewFunctions.getMapView);
+            const logoutBtn = document.getElementById('logout-btn').addEventListener('click', this.logout);
         }
 
         
@@ -156,6 +157,11 @@ class ClientControls{
             //handle error
             return;
         }
+    }
+
+    logout = function(){
+        sessionStorage.removeItem('token');
+        viewFunctions.getHomepage();
     }
 
 

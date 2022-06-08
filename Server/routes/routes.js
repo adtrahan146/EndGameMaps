@@ -38,7 +38,7 @@ router.get('/views/mapview', checkForToken, sendMapview);
 router.get('/views/navbar', checkForToken, sendNavbar);
 router.get('/views/loginMenu', sendLoginMenu);
 router.get('/views/createAccountMenu', checkForToken, sendCreateAccountMenu);
-router.get('/views/sort', verifyToken, sendPinSort);
+router.get('/views/sort', checkForToken, sendPinSort);
 router.get('/views/find', checkForToken, sendPinFind);
 
 router.get('/views/pinCreate', checkForToken, sendPinCreate);
