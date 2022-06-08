@@ -9,14 +9,44 @@ function verifyToken(req, res, next){
     if(token === 'null'){
         return res.status(401).json({msg: 'Unauthorized request.'});
     }
-    const payload = jwt.verify(token, 'xela123');
-    if(!payload){
-        console.log('3')
-
+    let payload;
+    try {
+        payload = jwt.verify(token, process.env.SECRET_KEY);
+    } catch (error) {
         return res.status(401).json({msg: 'Unauthorized request.'});
     }
+    
+    //The payload subject is the user's mongo given _id value
+    console.log(payload.subject);
+
     req.userId = payload.subject;
     next();
 }
 
-module.exports = {verifyToken};
+function checkForToken(req, res, next){
+
+    if(!req.headers.authorization){
+        return next();
+    }
+    const token = req.headers.authorization.split(' ')[1];
+    if(token === 'null'){
+        return next();
+    }
+    let payload;
+    try {
+        payload = jwt.verify(token, process.env.SECRET_KEY);
+    } catch (error) {
+        return res.status(400).json({msg:"ln39catch"});
+    }
+    if(!payload){
+        return next();
+    }
+    
+    //The payload subject is the user's mongo given _id value
+    console.log(payload.subject);
+
+    req.userId = payload.subject;
+    next();
+}
+
+module.exports = {verifyToken, checkForToken};

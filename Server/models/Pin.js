@@ -5,7 +5,8 @@ const pinSchema = new Schema({
     pinName: String,
     pinLocation: String,
     pinCategory: String,
-    comments: String
+    comments: String,
+    username: String
 })
 
 const Pin = module.exports = mongoose.model('Pin', pinSchema);

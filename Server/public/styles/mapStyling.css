@@ -21,3 +21,18 @@ hr{
 .maps-font{
    font-family: 'Cutive Mono', monospace;
 }
+
+
+.leaflet-popup-content-wrapper {
+   background: rgb(207, 197, 100);
+
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+   background-color: rgb(207, 197, 100);
+
+   color: rgb(0, 0, 0);
+}
+
+.leaflet-popup-tip-container {
+}

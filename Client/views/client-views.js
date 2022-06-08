@@ -28,15 +28,15 @@ export async function getMapView(){
 
 export async function getHomepage(){
     //Render homepage element
-    // if(sessionStorage.token){
-    //     getMapView();
-    //     return;
-    // }
-    const view = document.getElementById('client-view');
+    let config;
+    if(sessionStorage.token){
+        config = setupTokenHeader();
+    }
 
+    const view = document.getElementById('client-view');
     const url = `${BASE_URL}/views/homepage`;
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, config);
         const html = await response.text();
         view.innerHTML = html;
     } catch (error) {
@@ -95,16 +95,19 @@ export async function getPinSort(){
         return;
     }
     try {
+        let config = setupTokenHeader();
+
         const view = document.getElementById('mapOutputView');
 
         const url = `${BASE_URL}/views/sort`;
-        const response = await fetch(url);
+        const response = await fetch(url, config);
         const html = await response.text();
         view.innerHTML = html;
 
     } catch (error) {
         console.log(error);
     }
+    Controls.configureNoAccountBtns();
 }
 
 export async function getPinFind(){
@@ -134,19 +137,17 @@ export async function getPinCreate(){
         return;
     }
     try {
-        let config = compareTokens();
+        let config = setupTokenHeader();
         const url = `${BASE_URL}/views/pinCreate`;
-        console.log(config)
         const response = await fetch(url, config);
         const html = await response.text();
         view.innerHTML = html;
-        // var alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-        // var alertTrigger = document.getElementById('pinCreateSubmitBtn');
-        Controls.configurePinCreateBtns();
 
+        Controls.configurePinCreateBtns();
     } catch (error) {
         console.log(error);
     }
+    Controls.configureNoAccountBtns();
 }
 
 export async function getPinManage(){
@@ -157,21 +158,22 @@ export async function getPinManage(){
         return;
     }
     try {
+        let config = setupTokenHeader();
         const url = `${BASE_URL}/views/pinManage`;
-        const response = await fetch(url);
+        const response = await fetch(url, config);
         const html = await response.text();
         view.innerHTML = html;
-
     } catch (error) {
-        console.log(error);
+        //todo
+        //handle error
     }
+    Controls.configureNoAccountBtns();
 }
 
-function compareTokens(){
+export function setupTokenHeader(){
     const config = { };
     config.method = "GET";
     config.headers = {"authorization": 'Bearer ' + sessionStorage.getItem('token')};
-    console.log(config)
     return config;
 }
 

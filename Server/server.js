@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('./middleware/passport-middleware');
 const routes = require('./routes/routes.js');
-
+const dotenv = require('dotenv').config();
 const app = express();
 const port = 3000 || process.env.port;
 const {database} = require('./models/database');
@@ -41,9 +41,6 @@ function setup(){
     app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
     app.use('/bootstrap-icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'));
     app.use('/assets', express.static(path.join(__dirname, '/public/assets')));
-
-    
-
 }
 
 function start(){

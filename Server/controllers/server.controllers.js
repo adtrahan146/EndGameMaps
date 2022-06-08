@@ -1,23 +1,27 @@
-const path = require('path');
 const jwt = require('jsonwebtoken');
 const data = require('../models/ServerData');
-const passport = require('../middleware/passport-middleware');
 const User = require('../models/userSchema');
 const bcrypt = require('bcrypt');
 const Pin = require('../models/Pin');
+//add to env:
 const saltRounds = 10;
-
+//
 
 class ServerControllers{
-    
-    test(req, res){
-        res.json({'success': true});
-        console.log(`test json sent`);
-    }
 
-    sendHomepage(req, res){
-        res.render('homepage');
-        //can use this to send data w/homepage: { name: req.user.name }
+    async sendHomepage(req, res){
+        let user;
+
+        if(req.userId){
+            user = await User.findOne( {_id: req.userId} ).exec();
+            user = user.username;
+            console.log(user)
+        }else{
+            res.render('homepage', {loggedIn: false});
+            return;
+        }
+        res.render('homepage', {username: user, loggedIn: true});
+
         //console.log(req.session.token);
     }
 
@@ -50,23 +54,52 @@ class ServerControllers{
     sendPinFind(req, res){
         res.render(`find`);
     }
-    sendPinCreate(req, res){
-        res.render(`pinCreate`);
+    async sendPinCreate(req, res){
+        //after middleware, req should have user data if available
+
+        let user;
+
+        if(req.userId){
+            user = await User.findOne( {_id: req.userId} ).exec();
+            user = user.username;
+            // console.log(user)
+        }else{
+            res.render('pinCreate', {loggedIn: false});
+            return;
+        }
+        res.render('pinCreate', {username: user, loggedIn: true});
     }
-    sendPinManage(req, res){
-        res.render(`pinManage`);
+
+    async sendPinManage(req, res){
+        let user;
+        if(req.userId){
+            user = await User.findOne( {_id: req.userId} ).exec();
+            user = user.username;
+            console.log(user)
+        }else{
+            res.render(`pinManage`, {loggedIn: false});
+            return;
+        }
+        res.render(`pinManage`, {username: user, loggedIn: true});
     }
-    
+
 
     async postPinCreate(req, res, next){
         var pinToAdd = new Pin(req.body);
-        await data.addToPins(pinToAdd);
-        res.json(pinToAdd);
+        // var userToken = req.headers.token;
+        const userToken = req.userId;
+        const docs = await User.findOne({'_id': userToken});
+        if(docs){
+            pinToAdd.username = docs.username;
+            await data.addToPins(pinToAdd);
+            res.status(200).json({msg: "Success"});
+        }else{
+            res.status(400).json({msg: "Error looking up your account for pin creation"});
+        }
     }
     
     async sendAllPinsToClient(req, res){
         const pins = await data.getAllPins();
-        console.log(pins)
         res.json(pins);
     }
 
@@ -100,9 +133,9 @@ class ServerControllers{
 
     //register
     async postRegister(req, res){ 
-        let {name, email, password} = req.body;                                     //user fields from req body
+        let {name, email, username, password} = req.body;                                     //user fields from req body
         password = await bcrypt.hash(password, saltRounds);
-        const newUser = new User({ name: name, email: email, password: password });         //create new user instance
+        const newUser = new User({ name: name, email: email, username: username, password: password });         //create new user instance
         const document = await newUser.save()                                   //schema's save() into db
         const json = {state: true, msg: "data inserted", document: document }   //results as json
         res.json(json);

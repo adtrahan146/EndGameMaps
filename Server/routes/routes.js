@@ -14,10 +14,8 @@ const {test, sendHomepage,
     deleteuserDELETE,
     specialGET} = require('../controllers/server.controllers.js');
 const User = require('../models/userSchema.js');
-const {verifyToken} = require('../middleware/jwt-middleware')
+const {verifyToken, checkForToken} = require('../middleware/jwt-middleware')
 
-
-router.get('/test', test);
 //todo
  
 router.post('/login/loginSubmit', postLogin);
@@ -29,23 +27,24 @@ router.post('/login/createAccount', postRegister);
 
 
 //Need to run profanity filter thru any POSTs
-router.post('/mapMenu/pinCreate', postPinCreate);
+router.post('/mapMenu/pinCreate', verifyToken, postPinCreate);
 
 router.get('/mapMenu/manage/:pinID');
 router.get('/mapMenu/manage/:pinID');
 
 //views
-router.get('/views/homepage', sendHomepage);
-router.get('/views/mapview', sendMapview);
-router.get('/views/navbar', sendNavbar);
+router.get('/views/homepage', checkForToken, sendHomepage);
+router.get('/views/mapview', checkForToken, sendMapview);
+router.get('/views/navbar', checkForToken, sendNavbar);
 router.get('/views/loginMenu', sendLoginMenu);
-router.get('/views/createAccountMenu', sendCreateAccountMenu);
-router.get('/views/sort', sendPinSort);
-router.get('/views/find', sendPinFind);
+router.get('/views/createAccountMenu', checkForToken, sendCreateAccountMenu);
+router.get('/views/sort', verifyToken, sendPinSort);
+router.get('/views/find', checkForToken, sendPinFind);
 
-router.get('/views/pinCreate', verifyToken, sendPinCreate);
+router.get('/views/pinCreate', checkForToken, sendPinCreate);
 
-router.get('/views/pinManage', sendPinManage);
+router.get('/views/pinManage', checkForToken, sendPinManage);
+
 router.get('/mapView/generatePins', sendAllPinsToClient);
 
 module.exports = router;

@@ -78,8 +78,13 @@ class OurMap{
 			var coords = pins[i].pinLocation.split(',');
 			var lat = coords[0];
 			var lng = coords[1];
-			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon});
-			pin.bindPopup(`<i>Name</i>: ${pins[i].pinName}<br><i>Category:</i> ${pins[i].pinCategory}<br><i>User Comments: </i>${pins[i].comments}<br>`).openPopup();
+			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon, title: pins[i].pinName});
+			pin.bindPopup(`
+					<i>Name</i>:  ${pins[i].pinName}<br>
+					<i>Category</i>:  ${pins[i].pinCategory}<br>
+					<i>User Comments</i>:  ${pins[i].comments}<br>
+					<i>Author</i>:  ${pins[i].username}<br>
+			`, {className: 'text-center justify-content-center maps-font'}).openPopup();
 			this.allPins.push(pin);
 			pin.addTo(this.map);
 		}

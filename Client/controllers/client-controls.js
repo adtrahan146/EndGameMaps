@@ -4,9 +4,14 @@ import mapView from '../model/mapView.js';
 class ClientControls{
 
     configureHomepageBtns = function(){
-        const loginBtn = document.getElementById('login-btn').addEventListener('click', viewFunctions.getLoginMenu);
-        const registerBtn = document.getElementById('register-btn').addEventListener('click', viewFunctions.getCreateAccountMenu);
-        const guestBtn = document.getElementById('guest-btn').addEventListener('click', viewFunctions.getMapView);
+        try {
+            const loginBtn = document.getElementById('login-btn').addEventListener('click', viewFunctions.getLoginMenu);
+            const registerBtn = document.getElementById('register-btn').addEventListener('click', viewFunctions.getCreateAccountMenu);
+            const guestBtn = document.getElementById('guest-btn').addEventListener('click', viewFunctions.getMapView);
+        } catch (error) {
+            const startBtn = document.getElementById('start-btn').addEventListener('click', viewFunctions.getMapView);
+        }
+
         
         //test
         // const readId = document.getElementById('readOneId').addEventListener('click', this.testUpdate);
@@ -77,23 +82,25 @@ class ClientControls{
             const data = new FormData(e.target);
 
             const name = data.get('name');
+            const username = data.get('username');
             const email = data.get('email');
             const password = data.get('password');
-
 
             const config = new Object();
 
             config.method = "POST";
             config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
-            config.body = JSON.stringify({'name': name, 'email': email, 'password': password});
+            config.body = JSON.stringify({'name': name, 'email': email, 'username': username, 'password': password});
 
             let response;
             let jsonResponse;
             try {
                 response = await fetch("http://localhost:3000/login/createAccount", config);
+
                 jsonResponse = await response.json();
             }catch(error) {
                 alert('There was an issue creating your account.');
+
             }
             
             document.getElementById('serverMsgField').innerHTML += `<p>${JSON.stringify(jsonResponse)}</p>`
@@ -107,35 +114,50 @@ class ClientControls{
 
     //tried to do bootstrap alert, but wasnt able to close alert... if you wanna give it a go
     configurePinCreateBtns = async function(){
-        const formElem = document.getElementById('pinCreate');
+        try {
+            const formElem = document.getElementById('pinCreate');
 
-        formElem.addEventListener('submit', async(e) => {
-            // on form submission, prevent default
-            e.preventDefault();
-            const data = new FormData(e.target);
+            formElem.addEventListener('submit', async(e) => {
+                // on form submission, prevent default
+                e.preventDefault();
+                const data = new FormData(e.target);
 
-            const pinName = data.get('pinName');
-            const pinLocation = data.get('pinLocation');
-            const pinCategory = data.get('pinCategory');
-            const comments = data.get('comments');
-          
-            const jsonData = JSON.stringify({pinName, pinLocation, pinCategory, comments});
+                const pinName = data.get('pinName');
+                const pinLocation = data.get('pinLocation');
+                const pinCategory = data.get('pinCategory');
+                const comments = data.get('comments');
+            
+                const jsonData = JSON.stringify({pinName, pinLocation, pinCategory, comments});
 
-            try {
-                const config = new Object();
-                config.method = "POST";
-                config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
-                config.body = JSON.stringify({pinName, pinLocation, pinCategory, comments});
-                const response = await fetch('http://localhost:3000/mapMenu/pinCreate', config);
-            } catch (error) {
-                
-            }
-            document.getElementById('mapOutputView').innerHTML = ``;
-            alert('Success!');
-            mapView.removeTempCreatePin();
-            mapView.getAllPins();
-        });
+                try {
+                    const config = new Object();
+                    config.method = "POST";
+                    config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json', "authorization": 'Bearer ' + sessionStorage.getItem('token')};
+                    config.body = JSON.stringify({pinName, pinLocation, pinCategory, comments});
+                    const response = await fetch('http://localhost:3000/mapMenu/pinCreate', config);
+                } catch (error) {
+                    alert('Error trying to send to server');
+                }
+                document.getElementById('mapOutputView').innerHTML = ``;
+                alert('Success!');
+                mapView.removeTempCreatePin();
+                mapView.getAllPins();
+            });
+        } catch (error) {
+            return;   
+        }
     }
+
+    configureNoAccountBtns = function(){
+        try {
+            document.getElementById('no-account-btn').addEventListener('click', viewFunctions.getHomepage);
+        } catch (error) {
+            //todo
+            //handle error
+            return;
+        }
+    }
+
 
     async testReadAll(){
         const config = new Object();

@@ -25,7 +25,13 @@
 
         <!--Column 2-->
         <div id="selector" class="col-md-3 text-center bg-warning d-flex flex-column justify-content-center h-auto">
-            <%- include('partials/accountMenu') %> 
+            <% if (loggedIn) { %>
+                <h3><%= username %></h3>
+                <%- include('partials/startup') %>
+            <%} else { %>
+                <%- include('partials/accountMenu') %> 
+            <% } %>
+
         </div>
 
     </div>
