@@ -46,6 +46,19 @@ class ServerData{
             //handle   
         }
     }
+
+    async findUsersPins(user){
+        try {
+            let pins = [];
+            for(let i=0; i<user.pins.length; i++){
+                let pin = await Pin.findById(user.pins[i]);
+                pins.push(pin);
+            }
+            return pins;
+        } catch (error) {
+            console.log('error finding users pins ln59')
+        }
+    }
 }
 
 module.exports = new ServerData();

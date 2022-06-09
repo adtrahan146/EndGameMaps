@@ -116,8 +116,24 @@ class ClientControls{
     //tried to do bootstrap alert, but wasnt able to close alert... if you wanna give it a go
     configurePinCreateBtns = async function(){
         try {
+            //works for getting checkboxes from form:
             const formElem = document.getElementById('pinCreate');
+            let categories = [];
 
+            document.getElementsByName('pinCategory').forEach(function(chk){
+                chk.addEventListener('click', function() {
+                  if(this.checked){
+                    categories.push(this.value);
+                    console.log(categories)
+                  }else{
+                    let i = categories.indexOf(this.value);
+                    categories.splice(i, 1);
+                    console.log(categories)
+                  }
+                });
+            });
+
+            //Submit event:
             formElem.addEventListener('submit', async(e) => {
                 // on form submission, prevent default
                 e.preventDefault();
@@ -125,8 +141,8 @@ class ClientControls{
 
                 const pinName = data.get('pinName');
                 const pinLocation = data.get('pinLocation');
-                const pinCategory = data.get('pinCategory');
-                const comments = data.get('comments');
+                const pinCategory = categories;
+                const comments = data.get('comments');                
         
                 try {
                     const config = new Object();

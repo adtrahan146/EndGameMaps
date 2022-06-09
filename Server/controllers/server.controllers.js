@@ -78,15 +78,17 @@ class ServerControllers{
 
     async sendPinManage(req, res){
         let user;
+        let usersPins;
         if(req.userId){
             user = await User.findOne( {_id: req.userId} ).exec();
+            usersPins = await data.findUsersPins(user);
             user = user.username;
-            console.log(user)
         }else{
             res.render(`pinManage`, {loggedIn: false});
             return;
         }
-        res.render(`pinManage`, {username: user, loggedIn: true});
+        console.log(usersPins)
+        res.render(`pinManage`, {username: user, loggedIn: true, usersPins: usersPins});
     }
 
 

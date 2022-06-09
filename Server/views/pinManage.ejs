@@ -5,30 +5,9 @@
                 <%= username %>'s  Pins: 
             </h2>
             <ol class="mt-3">
-                <li class="list-item">
-                    Pin 1
-                </li>
-                <li class="list-item">
-                    Pin 2
-                </li>
-                <li class="list-item">
-                    Pin 3
-                </li>
-                <li class="list-item">
-                    Pin 4
-                </li>
-                <li class="list-item">
-                    Pin 5
-                </li>
-                <li class="list-item">
-                    Pin 6
-                </li>
-                <li class="list-item">
-                    Pin 7
-                </li>
-                <li class="list-item">
-                    Pin 8
-                </li>
+                <% for( let index = 0; index < usersPins.length; index++ ) { %>
+                    <li class="list-item"><%= usersPins[index].pinName %> </li>
+                <% } %>
             </ol>
         </div>
     <%} else { %>
