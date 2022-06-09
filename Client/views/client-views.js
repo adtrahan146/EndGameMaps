@@ -132,6 +132,8 @@ export async function getPinFind(){
         const response = await fetch(url);
         const html = await response.text();
         view.innerHTML = html;
+        //add OurMap.panToRandomPin();
+        OurMap.panToRandomPin();
 
     } catch (error) {
         console.log(error);

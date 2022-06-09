@@ -57,9 +57,13 @@ class ServerControllers{
     sendPinSort(req, res){
         res.render(`sort`);
     }
-    sendPinFind(req, res){
-        res.render(`find`);
+
+    async sendPinFind(req, res){
+        let randomPin = await data.findRandomPin();
+        console.log(randomPin)
+        res.render(`find`, {randomPin: randomPin[0]});
     }
+
     async sendPinCreate(req, res){
         //after middleware, req should have user data if available
 
@@ -87,7 +91,7 @@ class ServerControllers{
             res.render(`pinManage`, {loggedIn: false});
             return;
         }
-        console.log(usersPins)
+        console.log(usersPins + '$$$ln92')
         res.render(`pinManage`, {username: user, loggedIn: true, usersPins: usersPins});
     }
 

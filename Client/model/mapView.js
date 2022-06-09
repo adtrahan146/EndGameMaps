@@ -121,6 +121,12 @@ class OurMap{
 		viewFunctions.getPinCreate();
 	}
 
+	panToRandomPin(){
+		let coords = this.allPins[Math.floor(Math.random() * this.allPins.length)];
+		coords = coords._latlng
+		this.map.flyTo(coords, 14);
+	}
+
 	removeTempCreatePin(){
 		if(this.Marker){
 			this.map.removeLayer(this.Marker);

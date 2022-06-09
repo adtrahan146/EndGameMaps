@@ -21,7 +21,6 @@ class ServerData{
     addToPins = async function(pinToAdd, docs){
         //adds pin from POST req at /mapMenu/pinCreate
         try {
-            console.log(pinToAdd)
             await pinToAdd.save(function(err, id){
                 //id._id returns the newly created _id val of the pin
                 let newId = id._id;
@@ -57,6 +56,16 @@ class ServerData{
             return pins;
         } catch (error) {
             console.log('error finding users pins ln59')
+        }
+    }
+
+    async findRandomPin(){
+        try {
+            let randomPin = await Pin.aggregate([{$sample: {size: 1}}]);
+            return randomPin;
+        } catch (error) {
+            console.log('error finding random pin ln68');
+            return;
         }
     }
 }
