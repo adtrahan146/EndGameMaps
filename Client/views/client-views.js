@@ -133,11 +133,17 @@ export async function getPinFind(){
         const html = await response.text();
         view.innerHTML = html;
         //add OurMap.panToRandomPin();
-        OurMap.panToRandomPin();
+        // randomPin._id = document.getElementById('random_id').;
+        // randomPin.radomName = document.getElementById('randomName').innerHTML;
+        // randomPin.randomCat = document.getElementById('randomCat').innerHTML;
+        // randomPin.randomComments = document.getElementById('randomComments').innerHTML;
+        // randomPin.randomUsername = document.getElementById('randomUsername').innerHTML;
+
 
     } catch (error) {
         console.log(error);
     }
+    OurMap.panToRandomPin();
 }
 
 export async function getPinCreate(){

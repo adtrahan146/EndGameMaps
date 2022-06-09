@@ -78,7 +78,7 @@ class OurMap{
 			var coords = pins[i].pinLocation.split(',');
 			var lat = coords[0];
 			var lng = coords[1];
-			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon, title: pins[i].pinName});
+			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon, title: pins[i]._id});
 			pin.bindPopup(`
 					<i>Name</i>:  ${pins[i].pinName}<br>
 					<i>Category</i>:  ${pins[i].pinCategory}<br>
@@ -88,6 +88,7 @@ class OurMap{
 			this.allPins.push(pin);
 			pin.addTo(this.map);
 		}
+		console.log(this.allPins[12])
 	}
 
 	//Called when clicked on map
@@ -121,8 +122,13 @@ class OurMap{
 		viewFunctions.getPinCreate();
 	}
 
-	panToRandomPin(){
-		let coords = this.allPins[Math.floor(Math.random() * this.allPins.length)];
+	async panToRandomPin(){
+		var randomPin = await document.getElementById('randomId').title;
+        // randomPin = await randomPin.value;
+//        console.log(randomPin)
+		let coords = this.allPins.filter(pins => pins.options.title === randomPin)[0];
+		console.log(coords)
+
 		coords = coords._latlng
 		this.map.flyTo(coords, 14);
 	}
