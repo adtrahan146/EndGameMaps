@@ -5,15 +5,19 @@ const BASE_URL = 'http://localhost:3000';
 
 export async function getMapView(){
     try {
+        let config;
+        if(sessionStorage.token){
+            config = setupTokenHeader();
+        }
         const view = document.getElementById('client-view');
-        const mapview = await fetch(`${BASE_URL}/views/mapview`);
+        const mapview = await fetch(`${BASE_URL}/views/mapview`, config);
         const mhHml = await mapview.text();
         view.innerHTML = mhHml;
 
         const navbarView = document.getElementById('navbar');
         const url = `${BASE_URL}/views/navbar`;
     
-        const response = await fetch(url);
+        const response = await fetch(url, config);
         const html = await response.text();
     
         navbarView.innerHTML = html;
@@ -38,6 +42,10 @@ export async function getHomepage(){
     try {
         const response = await fetch(url, config);
         const html = await response.text();
+        if(response.status === 400){
+            Controls.logout();
+            return;
+        }
         view.innerHTML = html;
     } catch (error) {
         view.innerHTML = `<h1>Oops! Sorry, server is down currently...</h1>`

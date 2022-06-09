@@ -25,11 +25,17 @@ class ServerControllers{
         //console.log(req.session.token);
     }
 
-    sendNavbar(req, res){
-        res.render(`navbar`);
-        console.log('navbar sent');
-        //console.log(req.session.token);
+    async sendNavbar(req, res){
+        let user;
 
+        if(req.userId){
+            user = await User.findOne( {_id: req.userId} ).exec();
+            user = user.username;
+            res.render(`navbar`, {username: user, loggedIn: true});
+            // console.log(user)
+        }else{
+            res.render('navbar', {loggedIn: false});
+        }
     }
 
     sendMapview(req, res){
@@ -85,13 +91,12 @@ class ServerControllers{
 
 
     async postPinCreate(req, res, next){
-        var pinToAdd = new Pin(req.body);
-        // var userToken = req.headers.token;
+        let pinToAdd = new Pin(req.body);
         const userToken = req.userId;
-        const docs = await User.findOne({'_id': userToken});
+        const docs = await data.findUserByToken(userToken);
         if(docs){
             pinToAdd.username = docs.username;
-            await data.addToPins(pinToAdd);
+            await data.addToPins(pinToAdd, docs);
             res.status(200).json({msg: "Success"});
         }else{
             res.status(400).json({msg: "Error looking up your account for pin creation"});

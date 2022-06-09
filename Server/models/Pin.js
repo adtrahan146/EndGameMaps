@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const pinSchema = new Schema({
     pinName: String,
     pinLocation: String,
-    pinCategory: String,
+    pinCategory: [String],
     comments: String,
     username: String
 })

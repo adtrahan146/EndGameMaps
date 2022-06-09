@@ -18,17 +18,34 @@ class ServerData{
         return list;
     }
 
-    addToPins = async function(pinToAdd, req, res){
+    addToPins = async function(pinToAdd, docs){
         //adds pin from POST req at /mapMenu/pinCreate
         try {
             console.log(pinToAdd)
-            await pinToAdd.save();
-            // res.json({success: true});
+            await pinToAdd.save(function(err, id){
+                //id._id returns the newly created _id val of the pin
+                let newId = id._id;
+                console.log(id)
+                User.updateOne({_id: docs._id}, {$push: {pins: [newId]}}).exec();
+            });
         } catch (error) {
-            // res.status(400).send("Failed saving to DB Error")
+            //handle error
+            console.log('error at 34 data')
         }
     }
-    
+
+    async findUserByToken(token){
+        try {
+            const docs = await User.findOne({'_id': token}).exec();
+            if(docs){
+                return docs;
+            }else{
+                return;
+            }
+        } catch (error) {
+            //handle   
+        }
+    }
 }
 
 module.exports = new ServerData();

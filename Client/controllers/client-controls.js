@@ -127,9 +127,7 @@ class ClientControls{
                 const pinLocation = data.get('pinLocation');
                 const pinCategory = data.get('pinCategory');
                 const comments = data.get('comments');
-            
-                const jsonData = JSON.stringify({pinName, pinLocation, pinCategory, comments});
-
+        
                 try {
                     const config = new Object();
                     config.method = "POST";
@@ -162,65 +160,6 @@ class ClientControls{
     logout = function(){
         sessionStorage.removeItem('token');
         viewFunctions.getHomepage();
-    }
-
-
-    async testReadAll(){
-        const config = new Object();
-        config.method = "GET";
-        const response = await fetch("http://localhost:3000/getuser", config);
-        const data = await response.json()
-        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
-    }
-    async testRead(){
-        const config = new Object();
-        config.method = "GET";
-        const response = await fetch(`http://localhost:3000/get/${readId.value}`, config);
-        const data = await response.json()
-        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
-    }
-    async testCreate(){
-        const config = new Object();
-        config.method = "POST";
-        config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
-        config.body = JSON.stringify({'email': email.value, 'password': password.value});
-        const response = await fetch("http://localhost:3000//login/createAccount", config);
-        const data = await response.json()
-        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
-    }
-    async testUpdate(){
-        const config = new Object();
-        config.method = "PUT";
-        config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
-        config.body = JSON.stringify({'email': updateEmail.value, 'password': updatePassword.value});
-        const response = await fetch(`http://localhost:3000/update/${readId.value}`, config);
-        const data = await response.json()
-        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`
-    }
-    async testDelete(){
-        const config = new Object();
-        config.method = "DELETE";
-        const response = await fetch(`http://localhost:3000/delete/${deleteId.value}`, config);
-        const data = await response.json()
-        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`
-    }
-    async testLogin(){
-        const config = new Object();
-        config.method = "POST";
-        config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json'};
-        config.body = JSON.stringify({'email': loginId.value, 'password': loginPassword.value});
-        const response = await fetch("http://localhost:3000/login/loginSubmit", config);
-        const data = await response.json();
-        sessionStorage.token = data.token;
-        document.getElementById('testOutput').innerHTML += `<p>${JSON.stringify(data)}</p>`;
-    }
-    async testAuth(){
-        const config = {};
-        config.method = "GET";
-        config.headers = {"Authorization": 'Bearer ' + sessionStorage.getItem('token')}
-        const response = await fetch("http://localhost:3000/special", config);
-        const data = await response.json()
-        document.body.innerHTML += `<p>${JSON.stringify(data)}</p>`
     }
 }
 
