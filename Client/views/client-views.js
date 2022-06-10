@@ -28,6 +28,7 @@ export async function getMapView(){
     OurMap.initializeMap();
     Controls.configureNavbarBtns();
     Controls.configureMapMenuBtns();
+    window.scrollTo(0,0);
 }
 
 export async function getHomepage(){

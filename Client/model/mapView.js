@@ -21,7 +21,7 @@ class OurMap{
 	
 	async initializeMap(){
 
-		this.map = L.map('map');
+		this.map = L.map('map', {scrollWheelZoom: false});
 
 		//TODO: Take in user coords as params for setView()
 		this.map.setView([this.#position.latitude, this.#position.longitude], 11);

@@ -1,13 +1,38 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-md bg-warning navbar-light maps-font">
-    <div class="container-fluid">
         <% if (loggedIn) { %>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto"><li></li></ul>
-                    <button id="nv-home" class="btn btn-outline-dark mx-2" href="#"> <i class="bi bi-house"></i> <%= username %>  </button>
-                    <button id="nv-friends" class="btn btn-outline-dark mx-2" href="#"> <i class="bi bi-people"></i> Friends </button>
-                    <button id="nv-accountSettings" class="btn btn-outline-dark mx-2" href="#"> <i class="bi bi-gear"></i> Account </button>
+        <nav class="navbar bg-warning navbar-light maps-font">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar" aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="collapsibleNavbar">    
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <button id="nv-home" class="btn btn-outline-dark mx-2" href="#"> <i class="bi bi-house"></i> <%= username %>  </button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="nv-friends" class="btn btn-outline-dark mx-2" href="#"> <i class="bi bi-people"></i> Friends </button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="nv-accountSettings" class="btn btn-outline-dark mx-2" href="#"> <i class="bi bi-gear"></i> Account </button>
+                        </li>
+                    </ul>
             </div>
+        </nav>
+
+        <!-- <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+            <a href="#" class="navbar-brand">DemoTech</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </nav> -->
+
         <%} else { %>
             <%- include('partials/defaultNav') %> 
         <% } %>

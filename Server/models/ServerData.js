@@ -56,6 +56,7 @@ class ServerData{
             return pins;
         } catch (error) {
             console.log('error finding users pins ln59')
+            return ['<h4>No pins created yet!</h4>'];
         }
     }
 
