@@ -9,6 +9,11 @@ class OurMap{
 	Marker;
 	allPins;
 	usersPins;
+	usersPinsIds;
+
+	catNiche;
+	catOdd;
+	catReturn;
 
 	constructor(){
 		this.#position = {
@@ -18,7 +23,11 @@ class OurMap{
 		this.Marker = L.marker();
 		this.getUserCoords();
 		this.usersPins = [];
+		this.usersPinsIds = [];
 		this.allPins = [];
+		this.catNiche = [];
+		this.catOdd = [];
+		this.catReturn = [];
 	}
 	
 	async initializeMap(){
@@ -27,8 +36,8 @@ class OurMap{
 
 		//TODO: Take in user coords as params for setView()
 		this.map.setView([this.#position.latitude, this.#position.longitude], 11);
-		await this.getAllPins();
 		await this.getUsersPins();
+		await this.getAllPins();
 		
 		var userLoc = L.marker([this.#position.latitude, this.#position.longitude], {icon: mapAssets.goldIcon});
 		userLoc.bindPopup(`Your ISP says you're here! Sending goons now.`).openPopup();
@@ -86,8 +95,8 @@ class OurMap{
 			const pins = await response.json();
 			for(let i=0; i<pins.usersPins.length; i++){
 				this.usersPins.push(pins.usersPins[i]);
+				this.usersPinsIds.push(this.usersPins[i]._id);
 			}
-			console.log(this.usersPins[0]._id);
 
 		} catch (error) {
 			console.log(error);
@@ -96,10 +105,22 @@ class OurMap{
 
 	addPinsToMapView = (pins) =>{
 		for(let i=0; i<pins.length; i++){
+			let pin;
 			var coords = pins[i].pinLocation.split(',');
 			var lat = coords[0];
 			var lng = coords[1];
-			var pin = L.marker([lat, lng], {icon: mapAssets.greenIcon, title: pins[i]._id});
+			if(this.usersPinsIds.includes(pins[i]._id)){
+				pin = L.marker([lat, lng], {icon: mapAssets.goldIcon, title: pins[i]._id});
+			}else{
+				pin = L.marker([lat, lng], {icon: mapAssets.greenIcon, title: pins[i]._id});
+			}
+
+			for(let y=0; y<pins[i].pinCategory.length; y++){
+				if(pins[i].pinCategory[y] === 'Niche'){this.catNiche.push(pins[i]);}
+				if(pins[i].pinCategory[y] === 'Will Visit Again'){this.catReturn.push(pins[i]);}
+				if(pins[i].pinCategory[y] === 'Oddity'){this.catOdd.push(pins[i]);}
+			}
+
 			pin.bindPopup(`
 					<i>Name</i>:  ${pins[i].pinName}<br>
 					<i>Category</i>:  ${pins[i].pinCategory}<br>
@@ -109,7 +130,6 @@ class OurMap{
 			this.allPins.push(pin);
 			pin.addTo(this.map);
 		}
-		console.log(this.allPins[12])
 	}
 
 	//Called when clicked on map
@@ -144,10 +164,21 @@ class OurMap{
 	}
 
 	async panToRandomPin(){
-		var randomPin = await document.getElementById('randomId').title;
+		let randomPin = await document.getElementById('randomId').title;
 		let coords = this.allPins.filter(pins => pins.options.title === randomPin)[0];
 		coords = coords._latlng
-		this.map.flyTo(coords, 14);
+		this.map.flyTo(coords, 16);
+	}
+
+	panToPin(){
+		//Callback funct that uses 'this' as a reference to the btn's id & pin id value
+
+		//this vs globalThis
+		console.log(globalThis)
+		let coords = this.usersPinsIds.indexOf(this.id);
+		// let coords = 
+		coords = coords._latlng
+		this.map.flyTo(coords, 16);
 	}
 
 	removeTempCreatePin(){

@@ -6,7 +6,10 @@
             </h2>
             <ol class="mt-3">
                 <% for( let index = 0; index < usersPins.length; index++ ) { %>
-                    <li class="list-item"><%= usersPins[index].pinName %> </li>
+                    <li class="list-item">
+                        
+                        <button class="pinManage" id="<%= usersPins[index]._id %>" href="#"><%= usersPins[index].pinName %></button> 
+                    </li>
                 <% } %>
             </ol>
         </div>

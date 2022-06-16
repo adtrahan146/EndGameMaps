@@ -163,6 +163,16 @@ class ClientControls{
         }
     }
 
+    configurePinManageBtns = function(){
+        let length = mapView.usersPinsIds.length;
+        console.log(        document.getElementsByClassName('pinManage')        )
+        
+        for(let i=0; i<length; i++){
+            console.log('169')
+            document.getElementById(mapView.usersPinsIds[i]).addEventListener('click', mapView.panToPin);
+        }
+    }
+
     configureNoAccountBtns = function(){
         try {
             document.getElementById('no-account-btn').addEventListener('click', viewFunctions.getHomepage);
