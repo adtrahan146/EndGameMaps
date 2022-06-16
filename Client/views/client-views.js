@@ -14,13 +14,13 @@ export async function getMapView(){
         const mhHml = await mapview.text();
         view.innerHTML = mhHml;
 
-        const navbarView = document.getElementById('navbar');
-        const url = `${BASE_URL}/views/navbar`;
+        // const navbarView = document.getElementById('navbar');
+        // const url = `${BASE_URL}/views/navbar`;
     
-        const response = await fetch(url, config);
-        const html = await response.text();
+        // const response = await fetch(url, config);
+        // const html = await response.text();
     
-        navbarView.innerHTML = html;
+        // navbarView.innerHTML = html;
     } catch (error) {
         console.log('ERROR.');
         view.innerHTML = `<h1>ERROR: Reload page in 2 seconds.</h1>`

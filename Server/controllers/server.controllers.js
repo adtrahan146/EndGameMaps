@@ -38,10 +38,18 @@ class ServerControllers{
         }
     }
 
-    sendMapview(req, res){
+    async sendMapview(req, res){
         //console.log(req.session.token);
+        let user;
 
-        res.render(`mapView`);
+        if(req.userId){
+            user = await User.findOne( {_id: req.userId} ).exec();
+            user = user.username;
+            res.render(`mapView`, {username: user, loggedIn: true});
+            // console.log(user)
+        }else{
+            res.render(`mapView`, {loggedIn: false});
+        }
     }
 
     sendLoginMenu(req, res){
@@ -91,7 +99,6 @@ class ServerControllers{
             res.render(`pinManage`, {loggedIn: false});
             return;
         }
-        console.log(usersPins + '$$$ln92')
         res.render(`pinManage`, {username: user, loggedIn: true, usersPins: usersPins});
     }
 

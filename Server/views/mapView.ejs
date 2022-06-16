@@ -1,11 +1,14 @@
-<div id="navbar"></div>
-
+<% if (loggedIn) { %>
+<%- include('partials/navbar') %> 
+<%} else { %>
+    <%- include('partials/defaultNav') %> 
+<% } %>
 <div class="container-fluid text-white">
     <div class="row position-relative">
 
         <div class="col-md-3">
 
-            <div id="mapViewMenu" class="btn-group justify-content-center" role="group">
+            <div id="mapViewMenu" class="justify-content-center">
 				<%- include('partials/mapMenu') %> 
 			</div>
 
