@@ -36,7 +36,7 @@ function checkForToken(req, res, next){
     try {
         payload = jwt.verify(token, process.env.SECRET_KEY);
     } catch (error) {
-        return res.status(400).json({msg:"ln39catch"});
+        return res.status(400).render(`homepage`, {msg:"ln39catch"});
     }
     if(!payload){
         return next();

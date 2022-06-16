@@ -44,8 +44,8 @@ class ServerControllers{
 
         if(req.userId){
             user = await User.findOne( {_id: req.userId} ).exec();
-            user = user.username;
-            res.render(`mapView`, {username: user, loggedIn: true});
+            let userPins = await data.findUsersPins(user);
+            res.render(`mapView`, {username: user.username, loggedIn: true, userPins: userPins});
             // console.log(user)
         }else{
             res.render(`mapView`, {loggedIn: false});
@@ -94,12 +94,24 @@ class ServerControllers{
         if(req.userId){
             user = await User.findOne( {_id: req.userId} ).exec();
             usersPins = await data.findUsersPins(user);
-            user = user.username;
         }else{
             res.render(`pinManage`, {loggedIn: false});
             return;
         }
-        res.render(`pinManage`, {username: user, loggedIn: true, usersPins: usersPins});
+        res.render(`pinManage`, {username: user.username, loggedIn: true, usersPins: usersPins});
+    }
+
+    async sendUsersPins(req, res){
+        let user;
+        let usersPins;
+        if(req.userId){
+            user = await User.findOne( {_id: req.userId} ).exec();
+            usersPins = await data.findUsersPins(user);
+        }else{
+            res.status(400).json({msg: 'error'});
+            return;
+        }
+        res.status(200).json({usersPins: usersPins});
     }
 
 

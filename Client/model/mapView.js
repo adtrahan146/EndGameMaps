@@ -8,6 +8,7 @@ class OurMap{
 	map;
 	Marker;
 	allPins;
+	usersPins;
 
 	constructor(){
 		this.#position = {
@@ -16,6 +17,7 @@ class OurMap{
 		};
 		this.Marker = L.marker();
 		this.getUserCoords();
+		this.usersPins = [];
 		this.allPins = [];
 	}
 	
@@ -26,6 +28,7 @@ class OurMap{
 		//TODO: Take in user coords as params for setView()
 		this.map.setView([this.#position.latitude, this.#position.longitude], 11);
 		await this.getAllPins();
+		await this.getUsersPins();
 		
 		var userLoc = L.marker([this.#position.latitude, this.#position.longitude], {icon: mapAssets.goldIcon});
 		userLoc.bindPopup(`Your ISP says you're here! Sending goons now.`).openPopup();
@@ -63,9 +66,10 @@ class OurMap{
 	}
 
 	getAllPins = async () =>{
-		try {	
+		try {
+			let config = viewFunctions.setupTokenHeader();	
 			const url = `${BASE_URL}/mapView/generatePins`;
-			const response = await fetch(url);
+			const response = await fetch(url, config);
 			const pins = await response.json();
 			this.addPinsToMapView(pins);
 
@@ -73,6 +77,23 @@ class OurMap{
 			console.log(error);
 		}
 	}
+	
+	getUsersPins = async () =>{
+		try {
+			let config = viewFunctions.setupTokenHeader();	
+			const url = `${BASE_URL}/data/usersPins`;
+			const response = await fetch(url, config);
+			const pins = await response.json();
+			for(let i=0; i<pins.usersPins.length; i++){
+				this.usersPins.push(pins.usersPins[i]);
+			}
+			console.log(this.usersPins[0]._id);
+
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	addPinsToMapView = (pins) =>{
 		for(let i=0; i<pins.length; i++){
 			var coords = pins[i].pinLocation.split(',');
@@ -124,11 +145,7 @@ class OurMap{
 
 	async panToRandomPin(){
 		var randomPin = await document.getElementById('randomId').title;
-        // randomPin = await randomPin.value;
-//        console.log(randomPin)
 		let coords = this.allPins.filter(pins => pins.options.title === randomPin)[0];
-		console.log(coords)
-
 		coords = coords._latlng
 		this.map.flyTo(coords, 14);
 	}

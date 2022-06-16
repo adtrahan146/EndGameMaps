@@ -12,7 +12,8 @@ const {test, sendHomepage,
     postLogin, postRegister,
     getuserGET, userGET, updateuserPUT,
     deleteuserDELETE,
-    specialGET} = require('../controllers/server.controllers.js');
+    specialGET,
+    sendUsersPins} = require('../controllers/server.controllers.js');
 const User = require('../models/userSchema.js');
 const {verifyToken, checkForToken} = require('../middleware/jwt-middleware')
 
@@ -29,8 +30,9 @@ router.post('/login/createAccount', postRegister);
 //Need to run profanity filter thru any POSTs
 router.post('/mapMenu/pinCreate', verifyToken, postPinCreate);
 
-router.get('/mapMenu/manage/:pinID');
-router.get('/mapMenu/manage/:pinID');
+// router.get('/mapMenu/manage/:pinID');
+// router.get('/mapMenu/manage/:pinID');
+router.get('/data/usersPins', checkForToken, sendUsersPins);
 
 //views
 router.get('/views/homepage', checkForToken, sendHomepage);
