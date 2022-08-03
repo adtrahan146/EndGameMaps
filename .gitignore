@@ -1,2 +1,3 @@
+node_modules
 .ENV
 Server/models/database.js
