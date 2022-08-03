@@ -19,4 +19,4 @@ It's still under development in the early phases, but initial release is planned
 
 
 
-<sup> Authors: adtrahan146, John </sup>
+<sup> Authors: adtrahan146 </sup>
