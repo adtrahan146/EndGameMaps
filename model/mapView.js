@@ -1,6 +1,6 @@
 import * as viewFunctions from '../views/client-views.js';
 import * as mapAssets from './mapAssets.js';
-const BASE_URL = 'https://end-game-maps.herokuapp.com';
+const BASE_URL = 'https://git.heroku.com/end-game-maps.git';
 
 class OurMap{
 

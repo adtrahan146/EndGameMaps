@@ -1,7 +1,7 @@
 import Controls from '../controllers/client-controls.js';
 import OurMap from '../model/mapView.js';
 
-const BASE_URL = 'https://end-game-maps.herokuapp.com';
+const BASE_URL = 'https://git.heroku.com/end-game-maps.git';
 
 export async function getMapView(){
     try {

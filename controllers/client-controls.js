@@ -55,7 +55,7 @@ class ClientControls{
             let response;
             let jsonResponse;
             try {
-                response = await fetch("http://localhost:3000/login/loginSubmit", config);
+                response = await fetch("https://git.heroku.com/end-game-maps.git/login/loginSubmit", config);
                 jsonResponse = await response.json();
                 if(jsonResponse.token){
                     sessionStorage.token = jsonResponse.token;
@@ -96,7 +96,7 @@ class ClientControls{
             let response;
             let jsonResponse;
             try {
-                response = await fetch("http://localhost:3000/login/createAccount", config);
+                response = await fetch("https://git.heroku.com/end-game-maps.git/login/createAccount", config);
 
                 jsonResponse = await response.json();
             }catch(error) {
@@ -152,7 +152,7 @@ class ClientControls{
                     config.method = "POST";
                     config.headers = { 'Accept': 'application/json', 'Content-Type': 'application/json', "authorization": 'Bearer ' + sessionStorage.getItem('token')};
                     config.body = JSON.stringify({pinName, pinLocation, pinCategory, comments});
-                    const response = await fetch('http://localhost:3000/mapMenu/pinCreate', config);
+                    const response = await fetch('https://git.heroku.com/end-game-maps.git/mapMenu/pinCreate', config);
                 } catch (error) {
                     alert('Error trying to send to server');
                 }
