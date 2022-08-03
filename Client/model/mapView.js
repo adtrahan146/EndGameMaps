@@ -38,11 +38,6 @@ class OurMap{
 		this.map.setView([this.#position.latitude, this.#position.longitude], 11);
 		await this.getUsersPins();
 		await this.getAllPins();
-		
-		var userLoc = L.marker([this.#position.latitude, this.#position.longitude], {icon: mapAssets.goldIcon});
-		userLoc.bindPopup(`Your ISP says you're here! Sending goons now.`).openPopup();
-		userLoc.addTo(this.map);
-	
 		//National Geographic free map tiles that look nice on my weak eyes
 		var Esri_NatGeoWorldMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
 			attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
@@ -159,8 +154,12 @@ class OurMap{
 		if(pinCreate){
 			pinLocation.value = `${coords.lat},${coords.lng}`;
 			return;
+		}else{
+
+			let coordParams = `${coords.lat},${coords.lng}`;
+			viewFunctions.getPinCreate(coordParams);
+			return;
 		}
-		viewFunctions.getPinCreate();
 	}
 
 	async panToRandomPin(){
@@ -170,15 +169,17 @@ class OurMap{
 		this.map.flyTo(coords, 16);
 	}
 
-	panToPin(){
+	panToPin(idOfPin){
 		//Callback funct that uses 'this' as a reference to the btn's id & pin id value
 
 		//this vs globalThis
-		console.log(globalThis)
-		let coords = this.usersPinsIds.indexOf(this.id);
+		let coordsIndex = this.usersPinsIds.indexOf(idOfPin);
 		// let coords = 
-		coords = coords._latlng
+		let coords = this.usersPins[coordsIndex].pinLocation;
+
+		coords = coords.split(',');
 		this.map.flyTo(coords, 16);
+		return;
 	}
 
 	removeTempCreatePin(){

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <% if (loggedIn) { %>
+    <% if (loggedIn || !loggedIn === undefined) { %>
         <div>
             <h2 class="text-white mt-3">
                 <%= username %>'s  Pins: 
@@ -8,7 +8,7 @@
                 <% for( let index = 0; index < usersPins.length; index++ ) { %>
                     <li class="list-item">
                         
-                        <button class="pinManage" id="<%= usersPins[index]._id %>" href="#"><%= usersPins[index].pinName %></button> 
+                        <button class="btn btn-outline-light" id="<%= usersPins[index]._id %>" href="#"><%= usersPins[index].pinName %></button> 
                     </li>
                 <% } %>
             </ol>

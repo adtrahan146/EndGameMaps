@@ -1,17 +1,18 @@
-<div class="container">
-  <% if (loggedIn) { %>
-    <div class="container">
+<% if (loggedIn) { %>
+  <div class="container">
+    <div class="container">Create a new pin!
       <form id="pinCreate" action="http://localhost:3000/mapMenu/pinCreate" method="POST">
         <div id="liveAlertPlaceholder"></div>
         <div class="form-group">
-          <label for="pinName" class="mt-4">Name</label> 
+          <label for="pinName" class="mt-4">Pin Name</label> 
           <div class="input-group">
             <input id="pinName" name="pinName" placeholder="Name of Pin" type="text" required="required" class="form-control">
           </div>
         </div>
         <div class="form-group">
           <label for="pinLocation" class="mt-4">Location</label> 
-          <input id="pinLocation" name="pinLocation" placeholder="Click the map!" type="text" required="required" class="form-control">
+          <span id="commentsHelpBlock" class="form-text text-muted">(click the map!)</span>
+          <input id="pinLocation" name="pinLocation" type="hidden" required="required" class="form-control">
         </div>
         <div class="form-group mt-4">
           <label>Pin Category</label> 
@@ -33,15 +34,15 @@
         </div>
         <div class="form-group mt-4">
           <label for="comments">Additional Pin Comments</label> 
-          <textarea id="comments" name="comments" cols="40" rows="5" aria-describedby="commentsHelpBlock" class="form-control"></textarea> 
+          <textarea id="comments" name="comments" cols="40" rows="3" aria-describedby="commentsHelpBlock" class="form-control"></textarea> 
           <span id="commentsHelpBlock" class="form-text text-muted">Any additional comments that are relevant?</span>
         </div> 
         <button id="pinCreateSubmitBtn" type="submit" class="btn btn-outline-light mt-4 w-100">Submit</button>
       </form>
     </div>
-  <%} else { %>
-    <%- include('partials/noAccount') %> 
-  <% } %>
-  
-</div>
 
+  
+  </div>
+<%} else { %>
+  <%- include('partials/noAccount') %> 
+<% } %>

@@ -45,6 +45,9 @@ function checkForToken(req, res, next){
     //The payload subject is the user's mongo given _id value
     console.log(payload.subject);
 
+    // if(payload == undefined){
+    //     return next();
+    // }
     req.userId = payload.subject;
     next();
 }

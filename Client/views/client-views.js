@@ -140,7 +140,7 @@ export async function getPinFind(){
     OurMap.panToRandomPin();
 }
 
-export async function getPinCreate(){
+export async function getPinCreate(coordParams){
     const view = document.getElementById('mapOutputView');
     if(view.innerHTML){
         view.innerHTML = ``;
@@ -152,6 +152,11 @@ export async function getPinCreate(){
         const response = await fetch(url, config);
         const html = await response.text();
         view.innerHTML = html;
+
+        if(typeof coordParams === 'string'){
+            document.getElementById('pinLocation').value = coordParams;
+            console.log(coordParams);
+        }
 
         Controls.configurePinCreateBtns();
     } catch (error) {

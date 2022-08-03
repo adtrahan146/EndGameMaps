@@ -103,8 +103,11 @@ class ClientControls{
                 alert('There was an issue creating your account.');
 
             }
-            
-            document.getElementById('serverMsgField').innerHTML += `<p>${JSON.stringify(jsonResponse)}</p>`
+            if(jsonResponse.state === true){
+                viewFunctions.getLoginMenu();
+            }else{
+                document.getElementById('serverMsgField').innerHTML += `<p>There was an error...Try again.</p>`
+            }
             // document.getElementById('selector').innerHTML = viewFunctions.getLoginMenu();
         });
 
@@ -165,11 +168,17 @@ class ClientControls{
 
     configurePinManageBtns = function(){
         let length = mapView.usersPinsIds.length;
-        console.log(        document.getElementsByClassName('pinManage')        )
         
         for(let i=0; i<length; i++){
-            console.log('169')
-            document.getElementById(mapView.usersPinsIds[i]).addEventListener('click', mapView.panToPin);
+            try {
+                let thisId = document.getElementById(mapView.usersPinsIds[i]).id;
+                let ele = document.getElementById(mapView.usersPinsIds[i]);
+                ele.addEventListener('click', function(){mapView.panToPin(thisId)});
+
+            } catch (error) {
+                console.log(error)
+            }
+
         }
     }
 
