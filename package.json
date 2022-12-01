@@ -1,11 +1,14 @@
 {
-  "version": "0.0.1",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm install && live-server . --browser=CHROME"
-  },
-  "dependencies": {
-    "leaflet": "^1.8.0"
-  }
+    "version": "0.0.1",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npm install && live-server ."
+    },
+    "devDependencies": {
+        "live-server": "*"
+    },
+    "dependencies": {
+        "leaflet": "^1.8.0"
+    }
 }
